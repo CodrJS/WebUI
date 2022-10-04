@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import AppLayout from "../src/layouts/AppLayout";
-import classNames from "../src/utils/classNames";
+import AppLayout from "src/layouts/AppLayout";
+import classNames from "src/utils/classNames";
 import { Menu, Transition } from "@headlessui/react";
 import {
   ChevronRightIcon,
@@ -13,7 +13,6 @@ const projects = [
   {
     id: 1,
     title: "GraphQL API",
-    initials: "GA",
     team: "Engineering",
     members: [
       {
@@ -42,9 +41,11 @@ const projects = [
       },
     ],
     totalMembers: 12,
-    lastUpdated: "March 17, 2020",
     pinned: true,
     bgColorClass: "bg-pink-600",
+    slug: "graphql-api",
+    lastModified: "March 17, 2020",
+    createdAt: "March 17, 2020",
   },
   // More projects...
 ];
@@ -100,12 +101,15 @@ const Home: NextPage = () => {
                     "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md",
                   )}
                 >
-                  {project.initials}
+                  {project.title.split(" ").length > 1
+                    ? project.title.split(" ")[0][0] +
+                      project.title.split(" ")[1][0]
+                    : project.title.split(" ")[0][0]}
                 </div>
                 <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
                   <div className="flex-1 truncate px-4 py-2 text-sm">
                     <a
-                      href="#"
+                      href={`/project/${project.slug}`}
                       className="font-medium text-gray-900 hover:text-gray-600"
                     >
                       {project.title}
@@ -136,7 +140,7 @@ const Home: NextPage = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                                href={`/project/${project.slug}`}
                                 className={classNames(
                                   active
                                     ? "bg-gray-100 text-gray-900"
@@ -202,7 +206,7 @@ const Home: NextPage = () => {
             {projects.map(project => (
               <li key={project.id}>
                 <a
-                  href="#"
+                  href={`/project/${project.slug}`}
                   className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
                 >
                   <span className="flex items-center space-x-3 truncate">
@@ -272,7 +276,10 @@ const Home: NextPage = () => {
                           )}
                           aria-hidden="true"
                         />
-                        <a href="#" className="truncate hover:text-gray-600">
+                        <a
+                          href={`/project/${project.slug}`}
+                          className="truncate hover:text-gray-600"
+                        >
                           <span>
                             {project.title}{" "}
                             <span className="font-normal text-gray-500">
@@ -302,7 +309,7 @@ const Home: NextPage = () => {
                       </div>
                     </td>
                     <td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
-                      {project.lastUpdated}
+                      {project.lastModified}
                     </td>
                     <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                       <a

@@ -5,5 +5,5 @@
 #__next,
 html,
 body {
-  @apply h-full bg-white;
+  @apply h-screen bg-white;
 }

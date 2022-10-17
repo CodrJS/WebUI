@@ -8,6 +8,7 @@ import {
   EllipsisVerticalIcon,
 } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
+import Dropdown from "components/Dropdown";
 
 const projects = [
   {
@@ -74,12 +75,12 @@ const Home: NextPage = () => {
             >
               Share
             </button>
-            <button
-              type="button"
-              className="order-0 inline-flex items-center rounded-md border border-transparent bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:order-1 sm:ml-3"
+            <Dropdown
+              items={[{ href: "/project/new", title: "From config file" }]}
+              className="order-0 sm:order-1 sm:ml-3"
             >
               Create
-            </button>
+            </Dropdown>
           </div>
         </div>
 

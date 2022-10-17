@@ -1,7 +1,7 @@
 {
   "$id": "https://codrjs.com/schema/project.schema.json",
   "title": "Project",
-  "description": "A Codr annotation project configuration",
+  "description": "A Codr annotation project configuration.",
   "type": "object",
   "properties": {
     "general": {
@@ -42,14 +42,16 @@
             "type": "object",
             "properties": {
               "type": {
-                "enum": ["text"]
+                "enum": ["text", "code"],
+                "description": "Type of data to be displayed. Use `code` to enable highlighting."
               },
               "language": {
                 "type": "string",
-                "description": "Language is used to provide code highlighting"
+                "description": "Language is used to provide code highlighting."
               },
               "value": {
-                "type": "string"
+                "type": "string",
+                "description": "Location of the data or a hard-typed value to display."
               }
             },
             "required": ["type", "value"],
@@ -90,8 +92,9 @@
       "required": ["inputs", "outputs"]
     },
     "model": {
-      "$ref": "https://json-schema.org/draft/2020-12/schema"
+      "$ref": "https://json-schema.org/draft/2020-12/schema",
+      "description": "Project dataset sample format, used for data validation and referencing."
     }
   },
-  "required": ["general", "display"]
+  "required": ["general", "display", "model"]
 }

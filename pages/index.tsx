@@ -8,9 +8,9 @@ import {
 } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import Dropdown from "components/Dropdown";
-import projects from "src/data/projects";
+import PROJECTS from "src/data/projects";
 
-const pinnedProjects = projects.filter(project => project.general.pinned);
+const pinnedProjects = PROJECTS.filter(project => project.general.pinned);
 
 const Home: NextPage = () => {
   return (
@@ -163,7 +163,7 @@ const Home: NextPage = () => {
           role="list"
           className="mt-3 divide-y divide-gray-100 border-t border-gray-200"
         >
-          {projects.map(project => (
+          {PROJECTS.map(project => (
             <li key={project.id}>
               <a
                 href={`/project/${project.general.slug}`}
@@ -225,7 +225,7 @@ const Home: NextPage = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 bg-white">
-              {projects.map(project => (
+              {PROJECTS.map(project => (
                 <tr key={project.id}>
                   <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
                     <div className="flex items-center space-x-3 lg:pl-2">

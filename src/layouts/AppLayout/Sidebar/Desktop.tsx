@@ -3,6 +3,7 @@ import {
   ChevronUpDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
+import Link from "next/link";
 import { Fragment } from "react";
 import classNames from "../../../utils/classNames";
 import navigation from "./Navigation";
@@ -11,9 +12,7 @@ import teams from "./Teams";
 export default function DesktopSidebar() {
   return (
     <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pt-5 lg:pb-4">
-      <div className="flex flex-shrink-0 items-center px-6 text-lg">
-        Codr
-      </div>
+      <div className="flex flex-shrink-0 items-center px-6 text-lg">Codr</div>
       {/* Sidebar component, swap this element with another sidebar if you like */}
       <div className="mt-6 flex h-0 flex-1 flex-col overflow-y-auto">
         {/* User account dropdown */}
@@ -56,84 +55,102 @@ export default function DesktopSidebar() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm",
-                      )}
-                    >
-                      View profile
-                    </a>
+                    <Link passHref href="#">
+                      <a
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm",
+                        )}
+                      >
+                        View profile
+                      </a>
+                    </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm",
-                      )}
-                    >
-                      Settings
-                    </a>
+                    <Link passHref href="#">
+                      <a
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm",
+                        )}
+                      >
+                        Settings
+                      </a>
+                    </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm",
-                      )}
-                    >
-                      Notifications
-                    </a>
-                  )}
-                </Menu.Item>
-              </div>
-              <div className="py-1">
-                <Menu.Item>
-                  {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm",
-                      )}
-                    >
-                      Get desktop app
-                    </a>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm",
-                      )}
-                    >
-                      Support
-                    </a>
+                    <Link passHref href="#">
+                      <a
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm",
+                        )}
+                      >
+                        Notifications
+                      </a>
+                    </Link>
                   )}
                 </Menu.Item>
               </div>
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm",
-                      )}
-                    >
-                      Logout
-                    </a>
+                    <Link passHref href="#">
+                      <a
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm",
+                        )}
+                      >
+                        Get desktop app
+                      </a>
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link passHref href="#">
+                      <a
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm",
+                        )}
+                      >
+                        Support
+                      </a>
+                    </Link>
+                  )}
+                </Menu.Item>
+              </div>
+              <div className="py-1">
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link passHref href="#">
+                      <a
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm",
+                        )}
+                      >
+                        Logout
+                      </a>
+                    </Link>
                   )}
                 </Menu.Item>
               </div>
@@ -168,28 +185,28 @@ export default function DesktopSidebar() {
         <nav className="mt-6 px-3">
           <div className="space-y-1">
             {navigation.map(item => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={classNames(
-                  item.current
-                    ? "bg-gray-200 text-gray-900"
-                    : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
-                )}
-                aria-current={item.current ? "page" : undefined}
-              >
-                <item.icon
+              <Link passHref key={item.name} href={item.href}>
+                <a
                   className={classNames(
                     item.current
-                      ? "text-gray-500"
-                      : "text-gray-400 group-hover:text-gray-500",
-                    "mr-3 flex-shrink-0 h-6 w-6",
+                      ? "bg-gray-200 text-gray-900"
+                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                   )}
-                  aria-hidden="true"
-                />
-                {item.name}
-              </a>
+                  aria-current={item.current ? "page" : undefined}
+                >
+                  <item.icon
+                    className={classNames(
+                      item.current
+                        ? "text-gray-500"
+                        : "text-gray-400 group-hover:text-gray-500",
+                      "mr-3 flex-shrink-0 h-6 w-6",
+                    )}
+                    aria-hidden="true"
+                  />
+                  {item.name}
+                </a>
+              </Link>
             ))}
           </div>
           <div className="mt-8">
@@ -206,20 +223,18 @@ export default function DesktopSidebar() {
               aria-labelledby="desktop-teams-headline"
             >
               {teams.map(team => (
-                <a
-                  key={team.name}
-                  href={team.href}
-                  className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-                >
-                  <span
-                    className={classNames(
-                      team.bgColorClass,
-                      "w-2.5 h-2.5 mr-4 rounded-full",
-                    )}
-                    aria-hidden="true"
-                  />
-                  <span className="truncate">{team.name}</span>
-                </a>
+                <Link passHref key={team.name} href={team.href}>
+                  <a className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                    <span
+                      className={classNames(
+                        team.bgColorClass,
+                        "w-2.5 h-2.5 mr-4 rounded-full",
+                      )}
+                      aria-hidden="true"
+                    />
+                    <span className="truncate">{team.name}</span>
+                  </a>
+                </Link>
               ))}
             </div>
           </div>

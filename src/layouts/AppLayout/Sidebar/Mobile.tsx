@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "../../../utils/classNames";
 import navigation from "./Navigation";
 import teams from "./Teams";
+import Link from "next/link";
 
 export default function MobileSidebar({
   sidebar,
@@ -70,28 +71,30 @@ export default function MobileSidebar({
                 <nav className="px-2">
                   <div className="space-y-1">
                     {navigation.map(item => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                          "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md",
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        <item.icon
+                      <Link passHref key={item.name} href={item.href}>
+                        <a
+                          key={item.name}
+                          href={item.href}
                           className={classNames(
                             item.current
-                              ? "text-gray-500"
-                              : "text-gray-400 group-hover:text-gray-500",
-                            "mr-3 flex-shrink-0 h-6 w-6",
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                            "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md",
                           )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
+                          aria-current={item.current ? "page" : undefined}
+                        >
+                          <item.icon
+                            className={classNames(
+                              item.current
+                                ? "text-gray-500"
+                                : "text-gray-400 group-hover:text-gray-500",
+                              "mr-3 flex-shrink-0 h-6 w-6",
+                            )}
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </a>
+                      </Link>
                     ))}
                   </div>
                   <div className="mt-8">
@@ -107,20 +110,18 @@ export default function MobileSidebar({
                       aria-labelledby="mobile-teams-headline"
                     >
                       {teams.map(team => (
-                        <a
-                          key={team.name}
-                          href={team.href}
-                          className="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                        >
-                          <span
-                            className={classNames(
-                              team.bgColorClass,
-                              "w-2.5 h-2.5 mr-4 rounded-full",
-                            )}
-                            aria-hidden="true"
-                          />
-                          <span className="truncate">{team.name}</span>
-                        </a>
+                        <Link passHref key={team.name} href={team.href}>
+                          <a className="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                            <span
+                              className={classNames(
+                                team.bgColorClass,
+                                "w-2.5 h-2.5 mr-4 rounded-full",
+                              )}
+                              aria-hidden="true"
+                            />
+                            <span className="truncate">{team.name}</span>
+                          </a>
+                        </Link>
                       ))}
                     </div>
                   </div>

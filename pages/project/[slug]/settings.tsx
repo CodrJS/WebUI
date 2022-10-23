@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useMemo } from "react";
 import PROJECTS, { DATASETS } from "src/data/projects";
 import ProjectLayout from "src/layouts/ProjectLayout";
-import MarkdownIt from "utils/MarkdownIt";
 
 const ProjectPage: NextPage = () => {
   const router = useRouter();
@@ -29,12 +28,7 @@ const ProjectPage: NextPage = () => {
       </Head>
       <ProjectLayout project={project} datasets={datasets}>
         <div className="prose lg:prose-md py-4 px-8">
-          <h2>Guidelines:</h2>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: MarkdownIt.render(project.general.guidelines),
-            }}
-          />
+          <h2>Settings:</h2>
         </div>
       </ProjectLayout>
     </>

@@ -19,7 +19,7 @@ export default function DatasetNav({
 }) {
   return (
     <nav
-      className="space-y-1 lg:w-64 lg:border-r lg:border-gray-200 lg:bg-gray-50 lg:py-4 lg:px-2"
+      className="space-y-1 lg:w-64 lg:border-r lg:border-gray-200 lg:bg-gray-50 lg:py-4 lg:px-3"
       aria-label="Sidebar"
     >
       <div className="space-y-1 flex flex-col lg:sticky lg:top-4">

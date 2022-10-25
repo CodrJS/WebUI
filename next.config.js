@@ -7,6 +7,9 @@ const nextConfig = {
     //   exclude: ["error", "warn"],
     // },
   },
+  env: {
+    ORG_NAME: process.env.ORG_NAME,
+  },
 };
 
 module.exports = nextConfig;

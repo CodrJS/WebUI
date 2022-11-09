@@ -66,12 +66,12 @@ const PROJECTS = [
 ] as const;
 
 export const DATASETS = (project: project) => [
-  { name: "Dataset 1", href: `/project/${project.general.slug}/dataset-1`, count: "5" },
-  { name: "Dataset 2", href: `/project/${project.general.slug}/dataset-2` },
-  { name: "Dataset 3", href: `/project/${project.general.slug}/dataset-3`, count: "19" },
-  { name: "Dataset 4", href: `/project/${project.general.slug}/dataset-4`, count: "20+" },
-  { name: "Dataset 5", href: `/project/${project.general.slug}/dataset-5` },
-  { name: "Dataset 6", href: `/project/${project.general.slug}/dataset-6` },
+  { name: "Dataset 1", href: `/project/${project.general.slug}/dataset-1`, slug: 'dataset-1', count: "5" },
+  { name: "Dataset 2", href: `/project/${project.general.slug}/dataset-2`, slug: 'dataset-2', },
+  { name: "Dataset 3", href: `/project/${project.general.slug}/dataset-3`, slug: 'dataset-3', count: "19" },
+  { name: "Dataset 4", href: `/project/${project.general.slug}/dataset-4`, slug: 'dataset-4', count: "20+" },
+  { name: "Dataset 5", href: `/project/${project.general.slug}/dataset-5`, slug: 'dataset-5' },
+  { name: "Dataset 6", href: `/project/${project.general.slug}/dataset-6`, slug: 'dataset-6' },
 ];
 
 export type project = typeof PROJECTS[number];

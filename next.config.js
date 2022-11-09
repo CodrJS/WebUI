@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   compiler: {
     // removeConsole: {
@@ -9,6 +9,9 @@ const nextConfig = {
   },
   env: {
     ORG_NAME: process.env.ORG_NAME,
+  },
+  experimental: {
+    appDir: true,
   },
 };
 

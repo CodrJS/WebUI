@@ -1,3 +1,5 @@
+"use client";
+import "styles/globals.css";
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import SearchHeader from "./SearchHeader";

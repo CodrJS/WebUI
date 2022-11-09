@@ -7,3 +7,7 @@ html,
 body {
   @apply h-screen bg-white;
 }
+
+[data-nextjs-scroll-focus-boundary] {
+  display: contents;
+}

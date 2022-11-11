@@ -1,6 +1,7 @@
 import classNames from "utils/classNames";
 import { project } from "src/data/projects";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface INavItem {
   name: string;
@@ -12,12 +13,11 @@ interface INavItem {
 export default function DatasetNav({
   project,
   datasets,
-  currentRoute,
 }: {
   project?: project;
   datasets?: INavItem[];
-  currentRoute: string;
 }) {
+  const currentRoute = usePathname() as string;
   return (
     <nav
       className="space-y-1 lg:w-64 lg:border-r lg:border-gray-200 lg:bg-gray-50 lg:py-4 lg:px-3"
@@ -29,7 +29,7 @@ export default function DatasetNav({
             item={{
               name: "Dashboard",
               href: `/project/${project?.general.slug}`,
-              slug: ""
+              slug: "",
             }}
             current={`/project/${project?.general.slug}` === currentRoute}
           />

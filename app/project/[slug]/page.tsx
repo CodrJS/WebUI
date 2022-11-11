@@ -21,7 +21,7 @@ const ProjectPage = ({ params }: { params: { slug: string } }) => {
         <meta name="description" content="Codr Web UI" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="prose lg:prose-md py-4 px-8">
+      <div className="prose lg:prose-md">
         <h2>Guidelines:</h2>
         <div
           dangerouslySetInnerHTML={{

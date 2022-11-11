@@ -1,4 +1,5 @@
 "use client";
+import DatasetTable from "components/DatasetTable";
 import Head from "next/head";
 import { useMemo } from "react";
 import PROJECTS from "src/data/projects";
@@ -8,7 +9,6 @@ const ProjectPage = ({
 }: {
   params: { slug: string; dataset: string };
 }) => {
-  console.log("/[dataset]", params);
   const project = useMemo(() => {
     const result = PROJECTS.find(p => {
       return p.general.slug === params.slug;
@@ -25,6 +25,7 @@ const ProjectPage = ({
         <meta name="description" content="Codr Web UI" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <DatasetTable />
     </>
   ) : null;
 };

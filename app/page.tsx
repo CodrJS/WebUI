@@ -131,8 +131,8 @@ const Home = () => {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              href={`/project/${project.general.slug}/settings`}
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -140,8 +140,8 @@ const Home = () => {
                                 "block px-4 py-2 text-sm",
                               )}
                             >
-                              Share
-                            </a>
+                              Edit
+                            </Link>
                           )}
                         </Menu.Item>
                       </div>
@@ -276,12 +276,12 @@ const Home = () => {
                     {project.general.lastModified}
                   </td>
                   <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                    <a
-                      href="#"
+                    <Link
+                      href={`/project/${project.general.slug}/settings`}
                       className="text-indigo-600 hover:text-indigo-900"
                     >
                       Edit
-                    </a>
+                    </Link>
                   </td>
                 </tr>
               ))}

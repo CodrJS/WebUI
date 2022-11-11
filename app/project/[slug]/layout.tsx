@@ -10,7 +10,6 @@ export default function ProjectLayout({
 }: PropsWithChildren<{
   params: { slug: string; dataset?: string };
 }>) {
-  console.log("/[slug] layout", params);
   const project = useMemo(() => {
     const result = PROJECTS.find(p => {
       return p.general.slug === params.slug;
@@ -44,11 +43,10 @@ export default function ProjectLayout({
         <DatasetNav
           project={project}
           datasets={datasets}
-          currentRoute={`/project/${params.slug}${
-            params.dataset ? `/${params.dataset}` : ""
-          }`}
         />
-        {children}
+        <div className="py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 flex-1">
+          {children}
+        </div>
       </div>
     </>
   );

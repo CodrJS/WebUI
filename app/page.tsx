@@ -1,5 +1,4 @@
 "use client";
-import type { NextPage } from "next";
 import Head from "next/head";
 import classNames from "src/utils/classNames";
 import { Menu, Transition } from "@headlessui/react";
@@ -14,7 +13,7 @@ import Link from "next/link";
 
 const pinnedProjects = PROJECTS.filter(project => project.general.pinned);
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <>
       <Head>
@@ -254,6 +253,7 @@ const Home: NextPage = () => {
                     <div className="flex items-center space-x-2">
                       <div className="flex flex-shrink-0 -space-x-1">
                         {project.general.members.map(member => (
+                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             key={member.handle}
                             className="h-6 w-6 max-w-none rounded-full ring-2 ring-white"

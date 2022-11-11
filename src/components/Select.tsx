@@ -11,9 +11,9 @@ export default function Select({
   title?: string;
   name: string;
   placeholder?: string;
-  defaultValue?: any;
-  options: any[];
-  onChange: (value: any) => void;
+  defaultValue?: string;
+  options: { name: string; value: string }[];
+  onChange: (value: string) => void;
 }) {
   return (
     <div>

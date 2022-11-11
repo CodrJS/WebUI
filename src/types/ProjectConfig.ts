@@ -27,10 +27,10 @@ export default interface ProjectConfig {
   general: {
     type: TaskType;
     title: string;
-    slug?: string;
-    bgColorClass?: BgColorType;
-    guidelines?: string;
+    slug: string;
+    bgColorClass: BgColorType;
+    guidelines: string;
   };
   display: { inputs: Input<unknown>[]; outputs: Output[] };
-  model?: Record<string, unknown>;
+  model: Record<string, unknown>;
 }

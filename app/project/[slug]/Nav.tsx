@@ -1,7 +1,7 @@
 import classNames from "utils/classNames";
-import { project } from "src/data/projects";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useProject } from "utils/contexts/ProjectContext";
 
 interface INavItem {
   name: string;
@@ -11,12 +11,11 @@ interface INavItem {
 }
 
 export default function DatasetNav({
-  project,
   datasets,
 }: {
-  project?: project;
   datasets?: INavItem[];
 }) {
+  const project = useProject();
   const currentRoute = usePathname() as string;
   return (
     <nav

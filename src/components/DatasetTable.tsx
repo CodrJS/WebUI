@@ -1,6 +1,9 @@
 "use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import classNames from "utils/classNames";
+import { useProject } from "utils/contexts/ProjectContext";
 
 const people = [
   {
@@ -31,6 +34,8 @@ const people = [
 ];
 
 export default function DatasetTable() {
+  const project = useProject();
+  const currentRoute = usePathname();
   const checkbox = useRef<HTMLInputElement>(null);
   const [checked, setChecked] = useState(false);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -185,12 +190,12 @@ export default function DatasetTable() {
                         {item.role}
                       </td>
                       <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <a
-                          href="#"
+                        <Link
+                          href={`${currentRoute}/${project.general.slug}`}
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           Annotate<span className="sr-only">, {item.name}</span>
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                   ))}

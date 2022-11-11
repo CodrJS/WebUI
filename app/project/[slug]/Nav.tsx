@@ -10,11 +10,7 @@ interface INavItem {
   count?: string;
 }
 
-export default function DatasetNav({
-  datasets,
-}: {
-  datasets?: INavItem[];
-}) {
+export default function DatasetNav({ datasets }: { datasets?: INavItem[] }) {
   const project = useProject();
   const currentRoute = usePathname() as string;
   return (
@@ -37,9 +33,9 @@ export default function DatasetNav({
           <DatasetNavItem
             item={item}
             key={`dataset ${item.name}`}
-            current={
-              `/project/${project?.general.slug}/${item.slug}` === currentRoute
-            }
+            current={currentRoute.includes(
+              `/project/${project?.general.slug}/${item.slug}`,
+            )}
           />
         ))}
       </div>

@@ -1,7 +1,7 @@
 import { BgColorType } from "src/types/Colors";
 
 // classification and translation to be implemented first
-type TaskType = "classification" | "labeling" | "code-labeling" | "translation";
+type TaskType = "classification" | "tagging" | "code-tagging" | "translation";
 type InputField = "text";
 type OutputField =
   | "short-text"

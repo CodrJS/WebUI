@@ -44,7 +44,7 @@ export default function ProjectLayout({
       {/** PROJECT DATASET LAYOUT */}
       <div className="flex flex-col lg:flex-row lg:flex-1">
         <DatasetNav datasets={datasets} />
-        <div className="py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 flex-1">
+        <div className="flex flex-col py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 flex-1">
           {children}
         </div>
       </div>

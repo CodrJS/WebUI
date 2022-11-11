@@ -7,24 +7,28 @@ import { useProject } from "utils/contexts/ProjectContext";
 
 const people = [
   {
+    id: 1,
     name: "Lindsay Walton",
     title: "Front-end Developer",
     email: "lindsay.walton@example.com",
     role: "Member",
   },
   {
+    id: 2,
     name: "Lindsay Walton",
     title: "Front-end Developer",
     email: "lindsay.walton@example.com",
     role: "Member",
   },
   {
+    id: 3,
     name: "Lindsay Walton",
     title: "Front-end Developer",
     email: "lindsay.walton@example.com",
     role: "Member",
   },
   {
+    id: 4,
     name: "Lindsay Walton",
     title: "Front-end Developer",
     email: "lindsay.walton@example.com",
@@ -142,13 +146,13 @@ export default function DatasetTable() {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {people.map((item, personIdx) => (
                     <tr
-                      key={item.email}
+                      key={item.id}
                       className={classNames(
                         "hover:bg-gray-100",
                         selected.includes(item)
                           ? "bg-gray-50"
                           : personIdx % 2 === 0
-                          ? ''
+                          ? ""
                           : "bg-gray-50",
                       )}
                     >

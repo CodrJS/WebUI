@@ -10,7 +10,7 @@ interface INavItem {
   count?: string;
 }
 
-export default function DatasetNav({ datasets }: { datasets?: INavItem[] }) {
+export default function ProjectNav({ datasets }: { datasets?: INavItem[] }) {
   const project = useProject();
   const currentRoute = usePathname() as string;
   return (
@@ -20,7 +20,7 @@ export default function DatasetNav({ datasets }: { datasets?: INavItem[] }) {
     >
       <div className="space-y-1 flex flex-col lg:sticky lg:top-4">
         <div className="mb-4 space-y-1 flex flex-col">
-          <DatasetNavItem
+          <ProjectNavItem
             item={{
               name: "Dashboard",
               href: `/project/${project?.general.slug}`,
@@ -30,7 +30,7 @@ export default function DatasetNav({ datasets }: { datasets?: INavItem[] }) {
           />
         </div>
         {datasets?.map(item => (
-          <DatasetNavItem
+          <ProjectNavItem
             item={item}
             key={`dataset ${item.name}`}
             current={currentRoute.includes(
@@ -43,7 +43,7 @@ export default function DatasetNav({ datasets }: { datasets?: INavItem[] }) {
   );
 }
 
-export function DatasetNavItem({
+export function ProjectNavItem({
   item,
   current,
 }: {
@@ -52,7 +52,6 @@ export function DatasetNavItem({
 }) {
   return (
     <Link
-      passHref
       href={item.href}
       key={item.name}
       className={classNames(

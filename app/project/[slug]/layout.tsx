@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { PropsWithChildren, useMemo } from "react";
-import DatasetNav from "./Nav";
+import ProjectNav from "../../../src/components/ProjectNav";
 import PROJECTS, { DATASETS } from "src/data/projects";
 import { ProjectProvider } from "utils/contexts/ProjectContext";
 
@@ -43,7 +43,7 @@ export default function ProjectLayout({
       </div>
       {/** PROJECT DATASET LAYOUT */}
       <div className="flex flex-col lg:flex-row lg:flex-1">
-        <DatasetNav datasets={datasets} />
+        <ProjectNav datasets={datasets} />
         <div className="flex flex-col py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 flex-1">
           {children}
         </div>

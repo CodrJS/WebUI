@@ -1,8 +1,8 @@
 "use client";
 import "styles/globals.css";
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import SearchHeader from "./SearchHeader";
+import Sidebar from "components/Sidebar";
+import SearchHeader from "components/SearchHeader";
 
 export default function AppLayout({ children }: React.PropsWithChildren) {
   const [sidebarOpen, setSidebarOpen] = useState(false);

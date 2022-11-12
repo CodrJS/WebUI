@@ -2,7 +2,7 @@ import { Dispatch, Fragment, SetStateAction } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import classNames from "../../utils/classNames";
+import classNames from "utils/classNames";
 
 export default function SearchHeader({
   sidebar,

@@ -1,7 +1,7 @@
-import { BgColorType } from "src/types/Colors";
+import { BgColorType } from "types/Colors";
 
 // classification and translation to be implemented first
-type TaskType = "classification" | "labeling" | "code-labeling" | "translation";
+type TaskType = "classification" | "tagging" | "code-tagging" | "translation";
 type InputField = "text";
 type OutputField =
   | "short-text"
@@ -27,10 +27,10 @@ export default interface ProjectConfig {
   general: {
     type: TaskType;
     title: string;
-    slug?: string;
-    bgColorClass?: BgColorType;
-    guidelines?: string;
+    slug: string;
+    bgColorClass: BgColorType;
+    guidelines: string;
   };
   display: { inputs: Input<unknown>[]; outputs: Output[] };
-  model?: Record<string, unknown>;
+  model: Record<string, unknown>;
 }

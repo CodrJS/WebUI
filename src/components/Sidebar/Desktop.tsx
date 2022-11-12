@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { Fragment } from "react";
-import classNames from "../../../utils/classNames";
+import classNames from "utils/classNames";
 import navigation from "./Navigation";
 import teams from "./Teams";
 
@@ -55,49 +55,43 @@ export default function DesktopSidebar() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <Link passHref href="#">
-                      <a
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm",
-                        )}
-                      >
-                        View profile
-                      </a>
+                    <Link
+                      passHref
+                      href="#"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm",
+                      )}
+                    >
+                      View profile
                     </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <Link passHref href="#">
-                      <a
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm",
-                        )}
-                      >
-                        Settings
-                      </a>
+                    <Link
+                      passHref
+                      href="#"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm",
+                      )}
+                    >
+                      Settings
                     </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <Link passHref href="#">
-                      <a
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm",
-                        )}
-                      >
-                        Notifications
-                      </a>
+                    <Link
+                      passHref
+                      href="#"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm",
+                      )}
+                    >
+                      Notifications
                     </Link>
                   )}
                 </Menu.Item>
@@ -105,33 +99,29 @@ export default function DesktopSidebar() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <Link passHref href="#">
-                      <a
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm",
-                        )}
-                      >
-                        Get desktop app
-                      </a>
+                    <Link
+                      passHref
+                      href="#"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm",
+                      )}
+                    >
+                      Get desktop app
                     </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <Link passHref href="#">
-                      <a
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm",
-                        )}
-                      >
-                        Support
-                      </a>
+                    <Link
+                      passHref
+                      href="#"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm",
+                      )}
+                    >
+                      Support
                     </Link>
                   )}
                 </Menu.Item>
@@ -139,17 +129,15 @@ export default function DesktopSidebar() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <Link passHref href="#">
-                      <a
-                        className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm",
-                        )}
-                      >
-                        Logout
-                      </a>
+                    <Link
+                      passHref
+                      href="#"
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm",
+                      )}
+                    >
+                      Logout
                     </Link>
                   )}
                 </Menu.Item>
@@ -185,27 +173,28 @@ export default function DesktopSidebar() {
         <nav className="mt-6 px-3">
           <div className="space-y-1">
             {navigation.map(item => (
-              <Link passHref key={item.name} href={item.href}>
-                <a
+              <Link
+                passHref
+                key={item.name}
+                href={item.href}
+                className={classNames(
+                  item.current
+                    ? "bg-gray-200 text-gray-900"
+                    : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                )}
+                aria-current={item.current ? "page" : undefined}
+              >
+                <item.icon
                   className={classNames(
                     item.current
-                      ? "bg-gray-200 text-gray-900"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                      ? "text-gray-500"
+                      : "text-gray-400 group-hover:text-gray-500",
+                    "mr-3 flex-shrink-0 h-6 w-6",
                   )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  <item.icon
-                    className={classNames(
-                      item.current
-                        ? "text-gray-500"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6",
-                    )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
+                  aria-hidden="true"
+                />
+                {item.name}
               </Link>
             ))}
           </div>
@@ -223,17 +212,20 @@ export default function DesktopSidebar() {
               aria-labelledby="desktop-teams-headline"
             >
               {teams.map(team => (
-                <Link passHref key={team.name} href={team.href}>
-                  <a className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900">
-                    <span
-                      className={classNames(
-                        team.bgColorClass,
-                        "w-2.5 h-2.5 mr-4 rounded-full",
-                      )}
-                      aria-hidden="true"
-                    />
-                    <span className="truncate">{team.name}</span>
-                  </a>
+                <Link
+                  passHref
+                  key={team.name}
+                  href={team.href}
+                  className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                >
+                  <span
+                    className={classNames(
+                      team.bgColorClass,
+                      "w-2.5 h-2.5 mr-4 rounded-full",
+                    )}
+                    aria-hidden="true"
+                  />
+                  <span className="truncate">{team.name}</span>
                 </Link>
               ))}
             </div>

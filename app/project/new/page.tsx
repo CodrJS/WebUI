@@ -1,8 +1,8 @@
+"use client";
 import CodeEditor from "components/CodeEditor";
-import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import LanguageOptions from "src/constants/LanguageOptions";
+import LanguageOptions from "constants/LanguageOptions";
 import classNames from "utils/classNames";
 
 const defaultCode = `{
@@ -37,7 +37,7 @@ const defaultCode = `{
   }
 }`;
 
-const ProjectNewFilePage: NextPage = () => {
+const ProjectNewFilePage = () => {
   const [hasError, setHasError] = useState(false);
   return (
     <>

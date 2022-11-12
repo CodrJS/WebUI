@@ -1,6 +1,6 @@
-import type { NextPage } from "next";
+"use client";
 import Head from "next/head";
-import classNames from "src/utils/classNames";
+import classNames from "utils/classNames";
 import { Menu, Transition } from "@headlessui/react";
 import {
   ChevronRightIcon,
@@ -8,11 +8,12 @@ import {
 } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import Dropdown from "components/Dropdown";
-import PROJECTS from "src/data/projects";
+import PROJECTS from "data/projects";
+import Link from "next/link";
 
 const pinnedProjects = PROJECTS.filter(project => project.general.pinned);
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <>
       <Head>
@@ -68,12 +69,12 @@ const Home: NextPage = () => {
               </div>
               <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
                 <div className="flex-1 truncate px-4 py-2 text-sm">
-                  <a
+                  <Link
                     href={`/project/${project.general.slug}`}
                     className="font-medium text-gray-900 hover:text-gray-600"
                   >
                     {project.general.title}
-                  </a>
+                  </Link>
                   <p className="text-gray-500">
                     {project.general.totalMembers} Members
                   </p>
@@ -99,7 +100,7 @@ const Home: NextPage = () => {
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
+                            <Link
                               href={`/project/${project.general.slug}`}
                               className={classNames(
                                 active
@@ -109,15 +110,14 @@ const Home: NextPage = () => {
                               )}
                             >
                               View
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       </div>
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <div
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -126,13 +126,13 @@ const Home: NextPage = () => {
                               )}
                             >
                               Removed from pinned
-                            </a>
+                            </div>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              href={`/project/${project.general.slug}/settings`}
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -140,8 +140,8 @@ const Home: NextPage = () => {
                                 "block px-4 py-2 text-sm",
                               )}
                             >
-                              Share
-                            </a>
+                              Edit
+                            </Link>
                           )}
                         </Menu.Item>
                       </div>
@@ -253,6 +253,7 @@ const Home: NextPage = () => {
                     <div className="flex items-center space-x-2">
                       <div className="flex flex-shrink-0 -space-x-1">
                         {project.general.members.map(member => (
+                          // eslint-disable-next-line @next/next/no-img-element
                           <img
                             key={member.handle}
                             className="h-6 w-6 max-w-none rounded-full ring-2 ring-white"
@@ -261,9 +262,12 @@ const Home: NextPage = () => {
                           />
                         ))}
                       </div>
-                      {project.general.totalMembers > project.general.members.length ? (
+                      {project.general.totalMembers >
+                      project.general.members.length ? (
                         <span className="flex-shrink-0 text-xs font-medium leading-5">
-                          +{project.general.totalMembers - project.general.members.length}
+                          +
+                          {project.general.totalMembers -
+                            project.general.members.length}
                         </span>
                       ) : null}
                     </div>
@@ -272,12 +276,12 @@ const Home: NextPage = () => {
                     {project.general.lastModified}
                   </td>
                   <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                    <a
-                      href="#"
+                    <Link
+                      href={`/project/${project.general.slug}/settings`}
                       className="text-indigo-600 hover:text-indigo-900"
                     >
                       Edit
-                    </a>
+                    </Link>
                   </td>
                 </tr>
               ))}

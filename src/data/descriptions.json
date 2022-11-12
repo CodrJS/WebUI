@@ -1,0 +1,10 @@
+{
+  "annotation": {
+    "type": {
+      "classification": "The goal of this annoation task is to **classify** the given sample. Below you will find information provided by the dataset. To complete this task, answers the prompts provided.",
+      "tagging": "",
+      "code-tagging": "",
+      "translation": ""
+    }
+  }
+}

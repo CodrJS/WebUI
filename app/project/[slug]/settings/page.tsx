@@ -1,7 +1,7 @@
 "use client";
 import Head from "next/head";
 import { useMemo } from "react";
-import PROJECTS from "src/data/projects";
+import PROJECTS from "data/projects";
 import classNames from "utils/classNames";
 import {
   CreditCardIcon,

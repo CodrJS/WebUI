@@ -1,4 +1,4 @@
-import { BgColorType } from "src/types/Colors";
+import { BgColorType } from "types/Colors";
 
 // classification and translation to be implemented first
 type TaskType = "classification" | "tagging" | "code-tagging" | "translation";

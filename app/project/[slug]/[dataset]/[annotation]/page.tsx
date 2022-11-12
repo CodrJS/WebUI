@@ -1,6 +1,6 @@
 "use client";
 import { useProject } from "utils/contexts/ProjectContext";
-import descriptions from "src/data/descriptions.json";
+import descriptions from "data/descriptions.json";
 import MarkdownIt from "utils/MarkdownIt";
 import Button from "components/Button";
 

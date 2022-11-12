@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { PropsWithChildren, useMemo } from "react";
-import ProjectNav from "../../../src/components/ProjectNav";
-import PROJECTS, { DATASETS } from "src/data/projects";
+import ProjectNav from "components/ProjectNav";
+import PROJECTS, { DATASETS } from "data/projects";
 import { ProjectProvider } from "utils/contexts/ProjectContext";
 
 export default function ProjectLayout({

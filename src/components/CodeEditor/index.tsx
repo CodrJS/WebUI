@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EditorWindow from "./EditorWindow";
-import LanguageOptions, { LanguageOption } from "src/constants/LanguageOptions";
+import LanguageOptions, { LanguageOption } from "constants/LanguageOptions";
 import LanguagesDropdown from "./LanguagesDropdown";
 
 const CodeEditor = ({

@@ -1,5 +1,5 @@
 import createCtx from "utils/context";
-import ProjectConfig from "src/types/ProjectConfig";
+import ProjectConfig from "types/ProjectConfig";
 
 const [useContext, Provider] = createCtx<ProjectConfig>("project");
 

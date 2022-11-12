@@ -1,4 +1,4 @@
-import ProjectConfig from "src/types/ProjectConfig";
+import ProjectConfig from "types/ProjectConfig";
 
 const PROJECTS: (ProjectConfig & {
   $schema: string;

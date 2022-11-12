@@ -1,6 +1,6 @@
 "use client";
 import Head from "next/head";
-import classNames from "src/utils/classNames";
+import classNames from "utils/classNames";
 import { Menu, Transition } from "@headlessui/react";
 import {
   ChevronRightIcon,
@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import Dropdown from "components/Dropdown";
-import PROJECTS from "src/data/projects";
+import PROJECTS from "data/projects";
 import Link from "next/link";
 
 const pinnedProjects = PROJECTS.filter(project => project.general.pinned);

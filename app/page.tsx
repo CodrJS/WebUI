@@ -31,7 +31,7 @@ const Home = () => {
         <div className="mt-4 flex sm:mt-0 sm:ml-4">
           <button
             type="button"
-            className="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:ml-0"
+            className="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:ml-0"
           >
             Share
           </button>
@@ -80,7 +80,7 @@ const Home = () => {
                   </p>
                 </div>
                 <Menu as="div" className="flex-shrink-0 pr-2">
-                  <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                  <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
                     <span className="sr-only">Open options</span>
                     <EllipsisVerticalIcon
                       className="h-5 w-5"
@@ -278,7 +278,7 @@ const Home = () => {
                   <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                     <Link
                       href={`/project/${project.general.slug}/settings`}
-                      className="text-indigo-600 hover:text-indigo-900"
+                      className="text-sky-600 hover:text-sky-900"
                     >
                       Edit
                     </Link>

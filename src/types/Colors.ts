@@ -13,7 +13,7 @@ const ColorCodes = [
   "blue",
   "indego",
   "violet",
-  "purple",
+  "sky",
   "fuchsia",
   "pink",
   "rose",

@@ -18,7 +18,7 @@ export default function DesktopSidebar() {
         {/* User account dropdown */}
         <Menu as="div" className="relative inline-block px-3 text-left mt-1">
           <div>
-            <Menu.Button className="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+            <Menu.Button className="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-100">
               <span className="flex w-full items-center justify-between">
                 <span className="flex min-w-0 items-center justify-between space-x-3">
                   <img
@@ -164,7 +164,7 @@ export default function DesktopSidebar() {
               type="text"
               name="search"
               id="search"
-              className="block w-full rounded-md border-gray-300 pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className="block w-full rounded-md border-gray-300 pl-9 focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
               placeholder="Search"
             />
           </div>

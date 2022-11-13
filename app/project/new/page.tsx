@@ -68,9 +68,9 @@ const ProjectNewFilePage = () => {
           type="button"
           disabled={hasError}
           className={classNames(
-            "inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700",
-            "focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
-            "disabled:bg-indigo-400 disabled:cursor-not-allowed",
+            "inline-flex items-center rounded-md border border-transparent bg-sky-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-sky-700",
+            "focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2",
+            "disabled:bg-sky-400 disabled:cursor-not-allowed",
           )}
         >
           Create Project

@@ -3,13 +3,21 @@ import { useProject } from "utils/contexts/ProjectContext";
 import descriptions from "data/descriptions.json";
 import MarkdownIt from "utils/MarkdownIt";
 import Button from "components/Button";
-import { Disclosure } from "@headlessui/react";
-import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import Outputs from "utils/Outputs";
+import { useDataset } from "utils/contexts/DatasetContext";
+import Inputs from "utils/Inputs";
+import { Sample } from "types/Dataset";
 
-const AnnotationPage = () => {
+const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
   const project = useProject();
+  const dataset = useDataset();
   const prompts = Outputs(project.display.outputs);
+  const sample = (
+    dataset.samples.find(
+      s => s.id.toString() === params.annotation,
+    ) as unknown as Sample
+  );
+  const displays = Inputs(project.display.inputs, sample);
 
   return (
     <div className={"flex flex-col gap-4 flex-grow"}>
@@ -24,25 +32,8 @@ const AnnotationPage = () => {
         }}
       ></div>
       <div className={"flex flex-col lg:flex-row gap-4 lg:gap-8 flex-auto"}>
-        <div className={"flex-grow lg:basis-2/3"}>
-          <Disclosure
-            as="div"
-            className="rounded-md shadow-sm border border-gray-200"
-          >
-            {({ open }) => (
-              <>
-                <Disclosure.Button className="flex w-full py-2 px-4 items-center">
-                  <span className="flex-grow text-left">Column One</span>
-                  <ChevronUpIcon
-                    className={`${open ? "rotate-180 transform" : ""} h-5 w-5`}
-                  />
-                </Disclosure.Button>
-                <Disclosure.Panel className="pb-2 px-4 text-gray-500">
-                  This is what an expandable item will look like.
-                </Disclosure.Panel>
-              </>
-            )}
-          </Disclosure>
+        <div className={"flex flex-col flex-grow lg:basis-2/3 gap-4"}>
+          {displays}
         </div>
         <div className={"flex-grow lg:basis-1/3"}>Col 2</div>
       </div>

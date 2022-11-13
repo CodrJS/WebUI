@@ -4,6 +4,7 @@ import { PropsWithChildren, useMemo } from "react";
 import ProjectNav from "components/ProjectNav";
 import PROJECTS, { DATASETS } from "data/projects";
 import { ProjectProvider } from "utils/contexts/ProjectContext";
+import ProjectHeader from "components/ProjectHeader";
 
 export default function ProjectLayout({
   params,
@@ -27,11 +28,7 @@ export default function ProjectLayout({
     <ProjectProvider value={project}>
       {/* Page title & actions */}
       <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-        <div className="min-w-0 flex-1">
-          <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">
-            {project?.general.title}
-          </h1>
-        </div>
+        <ProjectHeader />
         <div className="mt-4 flex sm:mt-0 sm:ml-4">
           <Link
             href={`/project/${params.slug}/settings`}

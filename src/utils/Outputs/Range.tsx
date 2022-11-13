@@ -15,10 +15,10 @@ export default function Range({
   const id = `prompt-short-text-${index}`;
   const range = item.range as [number, number];
   const [value, setValue] = useState<string>(
-    ((range[1] - range[0]) / 2).toString(),
+    ((Math.abs(range[1]) - Math.abs(range[0])) / 2).toString(),
   );
   return (
-    <div className="flex-grow">
+    <div className="flex-grow" key={id}>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
         {item.prompt}
       </label>

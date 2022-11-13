@@ -13,8 +13,8 @@ export default function Radio({
 }) {
   const id = `prompt-radio-${index}`;
   return (
-    <div className="flex-grow">
-      <label className="block text-sm font-medium text-gray-700">
+    <div className="flex-grow" key={id}>
+      <label className="block font-medium text-gray-700">
         {item.prompt}
       </label>
       <fieldset className="mt-2">
@@ -31,7 +31,7 @@ export default function Radio({
               />
               <label
                 htmlFor={`${id}-${option.key}`}
-                className="ml-3 block text-sm font-medium text-gray-700"
+                className="ml-3 block text-gray-700"
               >
                 {option.key}
               </label>

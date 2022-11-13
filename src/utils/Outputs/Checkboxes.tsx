@@ -13,7 +13,7 @@ export default function Checkboxes({
 }) {
   const id = `prompt-checkboxes-${index}`;
   return (
-    <div className="flex-grow">
+    <div className="flex-grow" key={id}>
       <label className="block text-sm font-medium text-gray-700">
         {item.prompt}
       </label>

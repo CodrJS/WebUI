@@ -13,7 +13,7 @@ export default function LongText({
 }) {
   const id = `prompt-short-text-${index}`;
   return (
-    <div className="flex-grow">
+    <div className="flex-grow" key={id}>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
         {item.prompt}
       </label>

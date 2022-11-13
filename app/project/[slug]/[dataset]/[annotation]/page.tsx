@@ -5,9 +5,11 @@ import MarkdownIt from "utils/MarkdownIt";
 import Button from "components/Button";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
+import Outputs from "utils/Outputs";
 
 const AnnotationPage = () => {
   const project = useProject();
+  const prompts = Outputs(project.display.outputs);
 
   return (
     <div className={"flex flex-col gap-4 flex-grow"}>
@@ -25,7 +27,7 @@ const AnnotationPage = () => {
         <div className={"flex-grow lg:basis-2/3"}>
           <Disclosure
             as="div"
-            className="rounded-md shadow-md border border-gray-100"
+            className="rounded-md shadow-sm border border-gray-200"
           >
             {({ open }) => (
               <>
@@ -44,10 +46,21 @@ const AnnotationPage = () => {
         </div>
         <div className={"flex-grow lg:basis-1/3"}>Col 2</div>
       </div>
-      <div className={"flex-grow"}>Questions/prompts here</div>
+      <div className="py-4 px-8 border border-gray-200 shadow-sm rounded-lg">
+        <form
+          onChange={e => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            console.log(e.target.name, e.target.value);
+          }}
+          className={"flex flex-col gap-4"}
+        >
+          {prompts}
+        </form>
+      </div>
       <div
         className={
-          "flex-none shadow-md rounded-lg border border-gray-100 py-2 px-4 flex justify-end"
+          "flex-none shadow-sm rounded-lg border border-gray-200 py-2 px-4 flex justify-end"
         }
       >
         <div className="inline-flex gap-2">

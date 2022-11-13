@@ -11,16 +11,18 @@ type OutputField =
   | "range";
 
 // what the researchers provide to display to users
-interface Input<V> {
+export interface Input<V> {
   type: InputField;
   language?: string;
   value: V;
 }
 
 // where the user provides their annotation
-interface Output {
+export interface Output {
   type: OutputField;
+  prompt?: string;
   range?: [number, number]; // [min, max]
+  options?: { key: string; value: string | number }[];
 }
 
 export default interface ProjectConfig {

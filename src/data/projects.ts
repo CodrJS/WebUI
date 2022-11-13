@@ -64,6 +64,34 @@ const PROJECTS: (ProjectConfig & {
       outputs: [
         {
           type: "short-text",
+          prompt: "Short text example.",
+        },
+        {
+          type: "long-text",
+          prompt: "Long text example.",
+        },
+        {
+          type: "radio",
+          prompt: "Radio grouping example.",
+          options: [
+            { key: "Yes", value: 1 },
+            { key: "No", value: 0 },
+          ],
+        },
+        {
+          type: "multiple-choice",
+          prompt: "Checkboxes grouping example.",
+          options: [
+            { key: "Option 1", value: 1 },
+            { key: "Option 2", value: 2 },
+            { key: "Option 3", value: 3 },
+            { key: "Option 4", value: 4 },
+          ],
+        },
+        {
+          type: "range",
+          prompt: "Range example.",
+          range: [0, 10],
         },
       ],
     },

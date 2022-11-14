@@ -2,7 +2,7 @@ import { BgColorType } from "types/Colors";
 
 // classification and translation to be implemented first
 type TaskType = "classification" | "tagging" | "code-tagging" | "translation";
-type InputField = "text";
+type InputField = "text" | "code";
 type OutputField =
   | "short-text"
   | "long-text"
@@ -11,16 +11,19 @@ type OutputField =
   | "range";
 
 // what the researchers provide to display to users
-interface Input<V> {
+export interface Input {
   type: InputField;
   language?: string;
-  value: V;
+  value: string;
+  collapsible?: boolean;
 }
 
 // where the user provides their annotation
-interface Output {
+export interface Output {
   type: OutputField;
+  prompt?: string;
   range?: [number, number]; // [min, max]
+  options?: { key: string; value: string | number }[];
 }
 
 export default interface ProjectConfig {
@@ -31,6 +34,6 @@ export default interface ProjectConfig {
     bgColorClass: BgColorType;
     guidelines: string;
   };
-  display: { inputs: Input<unknown>[]; outputs: Output[] };
+  display: { inputs: Input[]; outputs: Output[] };
   model: Record<string, unknown>;
 }

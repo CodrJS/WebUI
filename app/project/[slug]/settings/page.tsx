@@ -33,7 +33,7 @@ const ProjectPage = () => {
       </SlideOver>
       <div className="xl:grid xl:grid-cols-12 xl:gap-x-5 flex-1">
         <div className="space-y-6 sm:px-6 xl:col-span-8 xl:col-start-3 xl:px-0">
-          <form action="#" method="POST" onChange={onChange}>
+          <form onChange={onChange}>
             <div className="shadow sm:overflow-hidden sm:rounded-md border border-gray-100">
               <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
                 <div>

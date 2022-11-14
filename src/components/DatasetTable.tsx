@@ -2,52 +2,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Sample } from "types/Dataset";
 import classNames from "utils/classNames";
-import { useProject } from "utils/contexts/ProjectContext";
+// import { useProject } from "utils/contexts/ProjectContext";
 import Badge from "./Badge";
 
-const people = [
-  {
-    id: 1,
-    status: "complete",
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    annotation: "...",
-  },
-  {
-    id: 2,
-    status: "complete",
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    annotation: "...",
-  },
-  {
-    id: 3,
-    status: "complete",
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    annotation: "...",
-  },
-  {
-    id: 4,
-    status: "incomplete",
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    annotation: "...",
-  },
-  // More people...
-];
-
-export default function DatasetTable() {
-  const project = useProject();
+export default function DatasetTable({items}: {items: Sample[]}) {
+  // const project = useProject();
   const currentRoute = usePathname();
   const checkbox = useRef<HTMLInputElement>(null);
   const [checked, setChecked] = useState(false);
@@ -56,14 +17,14 @@ export default function DatasetTable() {
 
   useEffect(() => {
     const isIndeterminate =
-      selected.length > 0 && selected.length < people.length;
-    setChecked(selected.length === people.length);
+      selected.length > 0 && selected.length < items.length;
+    setChecked(selected.length === items.length);
     setIndeterminate(isIndeterminate);
     if (checkbox.current) checkbox.current.indeterminate = isIndeterminate;
   }, [selected]);
 
   function toggleAll() {
-    setSelected(checked || indeterminate ? [] : people);
+    setSelected(checked || indeterminate ? [] : items);
     setChecked(!checked && !indeterminate);
     setIndeterminate(false);
   }
@@ -135,7 +96,7 @@ export default function DatasetTable() {
                   </div>
                 </div>
                 <div className="table-row-group divide-y divide-gray-200 bg-white">
-                  {people.map((item, personIdx) => (
+                  {items.map((item, personIdx) => (
                     <div
                       key={item.id}
                       className={classNames(
@@ -154,7 +115,7 @@ export default function DatasetTable() {
                         <input
                           type="checkbox"
                           className="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-sky-600 hover:cursor-pointer focus:ring-sky-500 sm:left-6"
-                          value={item.email}
+                          value={item.id}
                           checked={selected.includes(item)}
                           onChange={e =>
                             setSelected(
@@ -185,7 +146,7 @@ export default function DatasetTable() {
                       </div>
                       <div className="table-col whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <Link
-                          href={`${currentRoute}/${project.general.slug}`}
+                          href={`${currentRoute}/${item.id}`}
                           className="text-sky-600 hover:text-sky-900"
                         >
                           Annotate<span className="sr-only">, {item.id}</span>

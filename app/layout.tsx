@@ -1,5 +1,6 @@
 "use client";
 import "styles/globals.css";
+import "highlight.js/styles/atom-one-light.css"
 import React, { useState } from "react";
 import Sidebar from "components/Sidebar";
 import SearchHeader from "components/SearchHeader";

@@ -62,6 +62,14 @@ const PROJECTS: (ProjectConfig & {
           language: "java",
           collapsible: true,
         },
+        {
+          type: "text",
+          value: "**App name:** model.app_name\n\n**Class name:** model.class_name\n\n**Information Accessed:** model.information_accessed",
+        },
+        {
+          type: "text",
+          value: "Hello World!",
+        },
       ],
       outputs: [
         {

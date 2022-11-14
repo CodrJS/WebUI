@@ -12,11 +12,9 @@ const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
   const project = useProject();
   const dataset = useDataset();
   const prompts = Outputs(project.display.outputs);
-  const sample = (
-    dataset.samples.find(
-      s => s.id.toString() === params.annotation,
-    ) as unknown as Sample
-  );
+  const sample = dataset.samples.find(
+    s => s.id.toString() === params.annotation,
+  ) as unknown as Sample;
   const displays = Inputs(project.display.inputs, sample);
 
   return (
@@ -33,9 +31,9 @@ const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
       ></div>
       <div className={"flex flex-col lg:flex-row gap-4 lg:gap-8 flex-auto"}>
         <div className={"flex flex-col flex-grow lg:basis-2/3 gap-4"}>
-          {displays}
+          {displays[0]}
         </div>
-        <div className={"flex-grow lg:basis-1/3"}>Col 2</div>
+        <div className={"flex flex-col flex-grow lg:basis-1/3 gap-4 sticky"}>{displays[1]}</div>
       </div>
       <div className="py-4 px-8 border border-gray-200 shadow-sm rounded-lg">
         <form
@@ -55,7 +53,9 @@ const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
         }
       >
         <div className="inline-flex gap-2">
-          <div className="flex items-center mr-4">123 / 1000</div>
+          <div className="flex items-center mr-4">
+            {dataset.samples.indexOf(sample) + 1} / {dataset.samples.length}
+          </div>
           <Button primary={false}>Prev</Button>
           <Button>Next</Button>
         </div>

@@ -8,11 +8,12 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
-FROM node:16-alpine AS builder
+FROM deps AS builder
 WORKDIR /usr/src
 COPY . .
-COPY --from=deps /usr/src/node_modules ./node_modules
+# COPY --from=deps /usr/src/node_modules ./node_modules
 # RUN mkdir -p blogs
+RUN npx next telemetry disable
 RUN yarn build
 
 # Production image, copy all the files and run next

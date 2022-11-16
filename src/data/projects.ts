@@ -57,19 +57,37 @@ const PROJECTS: (ProjectConfig & {
     display: {
       inputs: [
         {
-          type: "code",
-          value: "model.hops.*",
-          language: "java",
+          type: "text",
+          value: "$sample.hops.[*]",
+          // language: "java",
+          format: "```java\n$value\n```",
           collapsible: true,
         },
         {
           type: "text",
-          value: "**App name:** model.app_name\n\n**Class name:** model.class_name\n\n**Information Accessed:** model.information_accessed",
+          value: "$sample",
+          format:
+            "**App name:** $value.app_name\n\n**Class name:** $value.class_name\n\n**Information Accessed:** $value.information_accessed",
         },
         {
           type: "text",
-          value: "Hello World!",
+          value: "$sample",
+          format:
+            "**Practice:** $value.practice\n\n**Purpose:** $value.purpose",
         },
+        {
+          type: "text",
+          value: "$sample.apis.[*]",
+          format:
+            "**API Called:** `$value.[0]`\n\n**API description:** $value.[1]",
+        },
+        // {
+        //   type: "text",
+        //   value: "$sample.apis2.[*]",
+        //   format:
+        //     "**API Called:** `$value.called`\n\n**API description:** $value.description",
+        //   collapsible: false,
+        // },
       ],
       outputs: [
         {
@@ -97,26 +115,41 @@ const PROJECTS: (ProjectConfig & {
         },
       ],
     },
-    model: {
-      type: "object",
-      properties: {
-        sample_id: { type: "string" },
-        app_name: { type: "string" },
-        class_name: { type: "string" },
-        method_name: { type: "string" },
-        information_accessed: { type: "string" },
-        apis: {
-          type: "array",
-          items: { type: "string" },
-          minItems: 2,
-          maxItems: 2,
+    sample: {
+      model: {
+        type: "object",
+        properties: {
+          sample_id: { type: "string" },
+          app_name: { type: "string" },
+          class_name: { type: "string" },
+          method_name: { type: "string" },
+          information_accessed: { type: "string" },
+          apis: {
+            type: "array",
+            items: {
+              type: "array",
+              items: { type: "string" },
+              minItems: 2,
+              maxItems: 2,
+            },
+          },
+          apis2: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                called: { type: "string" },
+                description: { type: "string" },
+              },
+            },
+          },
+          hops: {
+            type: "array",
+            items: { type: "string" },
+          },
         },
-        hops: {
-          type: "array",
-          items: { type: "string" },
-        },
+        required: ["sample_id", "apis", "hops"],
       },
-      required: ["sample_id", "apis", "hops"],
     },
   },
 ];
@@ -146,6 +179,18 @@ export const DATASETS = (project: project | ProjectConfig) => [
             "android.location.LocationManager;isProviderEnabled",
             "Returns the current enabled/disabled status of the given provider.",
           ],
+        ],
+        apis2: [
+          {
+            called: "android.location.LocationManager;getBestProvider",
+            description:
+              "Returns the name of the provider that best meets the given criteria.",
+          },
+          {
+            called: "android.location.LocationManager;isProviderEnabled",
+            description:
+              "Returns the current enabled/disabled status of the given provider.",
+          },
         ],
         practice: "Processing",
         purpose: "Functionality",

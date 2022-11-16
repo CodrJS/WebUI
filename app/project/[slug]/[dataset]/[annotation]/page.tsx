@@ -29,11 +29,11 @@ const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
           ),
         }}
       ></div>
-      <div className={"flex flex-col lg:flex-row gap-4 lg:gap-8 flex-auto"}>
-        <div className={"flex flex-col flex-grow lg:basis-2/3 gap-4"}>
+      <div className={"grid grid-cols-6 gap-4 xl:gap-8 flex-grow"}>
+        <div className={"flex flex-col col-span-6 xl:col-span-4 gap-4 break-words"}>
           {displays[0]}
         </div>
-        <div className={"flex flex-col flex-grow lg:basis-1/3 gap-4 sticky"}>{displays[1]}</div>
+        <div className={"flex flex-col col-span-6 xl:col-span-2 gap-4 break-words"}>{displays[1]}</div>
       </div>
       <div className="py-4 px-8 border border-gray-200 shadow-sm rounded-lg">
         <form

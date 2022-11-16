@@ -15,6 +15,7 @@ export interface Input {
   type: InputField;
   language?: string;
   value: string;
+  format?: string;
   collapsible?: boolean;
 }
 
@@ -35,5 +36,5 @@ export default interface ProjectConfig {
     guidelines: string;
   };
   display: { inputs: Input[]; outputs: Output[] };
-  model: Record<string, unknown>;
+  sample: { model: Record<string, unknown> };
 }

@@ -3,6 +3,7 @@
  */
 
 import { Output } from "types/ProjectConfig";
+import md from "utils/MarkdownIt";
 
 export default function Radio({
   item,
@@ -14,9 +15,12 @@ export default function Radio({
   const id = `prompt-radio-${index}`;
   return (
     <div className="flex-grow" key={id}>
-      <label className="block font-medium text-gray-700">
-        {item.prompt}
-      </label>
+      <label
+        className="block font-medium text-gray-700"
+        dangerouslySetInnerHTML={{
+          __html: item.prompt ? md.render(item.prompt) : "",
+        }}
+      />
       <fieldset className="mt-2">
         <legend className="sr-only"></legend>
         <div className="space-y-2">

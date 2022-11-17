@@ -32,7 +32,6 @@ export default function Inputs(items: Input[], sample: Sample) {
       const valuePaths = format.match(/(\$value(\.[\w*[\]]+)*)/g);
 
       for (const val of value as any[]) {
-        console.log(val);
         if (valuePaths) {
           // if paths exist, for each path, replace the value(s)
           for (const valuePath of valuePaths) {

@@ -59,7 +59,6 @@ const PROJECTS: (ProjectConfig & {
         {
           type: "text",
           value: "$sample.hops.[*]",
-          // language: "java",
           format: "```java\n$value\n```",
           collapsible: true,
         },
@@ -67,7 +66,7 @@ const PROJECTS: (ProjectConfig & {
           type: "text",
           value: "$sample",
           format:
-            "**App name:** $value.app_name\n\n**Class name:** $value.class_name\n\n**Information Accessed:** $value.information_accessed",
+            "**App name:** $value.app_name\n\n**Class name:** `$value.class_name`\n\n**Information Accessed:** $value.information_accessed",
         },
         {
           type: "text",
@@ -81,38 +80,77 @@ const PROJECTS: (ProjectConfig & {
           format:
             "**API Called:** `$value.[0]`\n\n**API description:** $value.[1]",
         },
-        // {
-        //   type: "text",
-        //   value: "$sample.apis2.[*]",
-        //   format:
-        //     "**API Called:** `$value.called`\n\n**API description:** $value.description",
-        //   collapsible: false,
-        // },
       ],
       outputs: [
         {
           type: "radio",
           prompt:
-            "Which of the following privacy captions describe how and why personal information is used in the code snippet above?",
+            "Which of the following privacy captions describe __how__ and __why__ personal information is used in the code snippet above?",
           options: [
             {
-              key: "The code segment uses location to calculate distance to nearby houses for its application functionality",
+              key: "We use your location (via network/GPS) for searching an area.",
               value: 1,
             },
             {
-              key: "The code segment uses location to uses GPS to find directions to nearest house.",
+              key: "We use your location (via network/GPS) for geofencing.",
               value: 2,
             },
             {
-              key: "The code segment uses location to show nearby friends in the neighborhood.",
+              key: "We use your location to show messages.",
               value: 3,
             },
             {
-              key: "The code segment uses location to suggest nearby real estate properties you might be interested in.",
+              key: "We use your location for other purposes.",
               value: 4,
             },
           ],
         },
+        // {
+        //   type: "radio",
+        //   prompt:
+        //     "Which of the following privacy captions describe __how__ and __why__ personal information is used in the code snippet above?",
+        //   options: [
+        //     {
+        //       key: "We collect your connection state for analytics purpose",
+        //       value: 1,
+        //     },
+        //     {
+        //       key: "We process your WiFi information for advertisement purpose.",
+        //       value: 2,
+        //     },
+        //     {
+        //       key: "We use location information for other purposes.",
+        //       value: 3,
+        //     },
+        //     {
+        //       key: "We collect your network information for advertisement purposes.",
+        //       value: 4,
+        //     },
+        //   ],
+        // },
+        // {
+        //   type: "radio",
+        //   prompt:
+        //     "Which of the following privacy captions describe __how__ and __why__ personal information is used in the code snippet above?",
+        //   options: [
+        //     {
+        //       key: "We collect your information from Facebook for advertisement purposes",
+        //       value: 1,
+        //     },
+        //     {
+        //       key: "We share your WiFi information with third-parties like Facebook.",
+        //       value: 2,
+        //     },
+        //     {
+        //       key: "We use network to make requests to websites such as Facebook.",
+        //       value: 3,
+        //     },
+        //     {
+        //       key: "We use network information for other purposes.",
+        //       value: 4,
+        //     },
+        //   ],
+        // },
       ],
     },
     sample: {
@@ -165,39 +203,67 @@ export const DATASETS = (project: project | ProjectConfig) => [
         id: 1,
         status: "incomplete",
         annotation: "...",
-        sample_id: "sample_1",
-        app_name: "BricckHarbor",
-        class_name: "com.urbanairship.location.LocationService",
-        method_name: "setProviders",
+        sample_id: "sample_9",
+        app_name: "Broome",
+        class_name: "com.biznessapps.components.LocationFinder",
         information_accessed: "location",
         apis: [
           [
-            "android.location.LocationManager;getBestProvider",
-            "Returns the name of the provider that best meets the given criteria.",
-          ],
-          [
-            "android.location.LocationManager;isProviderEnabled",
-            "Returns the current enabled/disabled status of the given provider.",
+            "android.location.LocationManager;requestLocationUpdates",
+            "Register for location updates using a provider selected through the given Criteria, and callbacks delivered via the provided PendingIntent",
           ],
         ],
-        apis2: [
-          {
-            called: "android.location.LocationManager;getBestProvider",
-            description:
-              "Returns the name of the provider that best meets the given criteria.",
-          },
-          {
-            called: "android.location.LocationManager;isProviderEnabled",
-            description:
-              "Returns the current enabled/disabled status of the given provider.",
-          },
-        ],
-        practice: "Processing",
-        purpose: "Functionality",
+        practice: ["Sharing", "Processing"],
+        purpose: ["Functionality"],
         hops: [
-          "/**\n*APK Name: BrickHarbor\n*Class Name: com.urbanairship.location.LocationService;\n*Method Name: setProviders\n*Android API Called: android.location.LocationManager;getBestProvider\n*API Description: Returns the name of the provider that best meets the given criteria. \n*Android API Called: android.location.LocationManager;isProviderEnabled\n*API Description: Returns the current enabled/disabled status of the given provider. \n*/\n\nprivate void setProviders() {\n  if (!com.urbanairship.UAirship.shared().getAirshipConfigOptions().locationOptions.allowGPSForLocationTracking) {\n    String v0_4;\n    this.bestProvider = com.urbanairship.analytics.LocationEvent$AllowableProvider.NETWORK.toString().toLowerCase(java.util.Locale.US);\n    if (!this.locationManager.isProviderEnabled(this.bestProvider)) {\n      v0_4 = 0;\n    } else {\n      v0_4 = this.bestProvider;\n    }\n    this.currentProvider = v0_4;\n  } else {\n    this.bestProvider = this.locationManager.getBestProvider(this.criteria, 0);\n    if (!this.locationManager.isProviderEnabled(this.bestProvider)) {\n      this.currentProvider = this.locationManager.getBestProvider(this.criteria, 1);\n    } else {\n      this.currentProvider = this.bestProvider;\n    }\n  }\n  Object[] v1_6 = new Object[2];\n  v1_6[0] = this.currentProvider;\n  v1_6[1] = this.bestProvider;\n  com.urbanairship.Logger.info(String.format(Current location provider: %s, best location provider: %s, v1_6));\n  return;\n}",
-          "static synthetic void access$400(com.urbanairship.location.LocationService p0)\n{\n  p0.setProviders();\n  return;\n}",
-          "public void requestSingleLocationUpdate(android.location.Criteria p7)\n{\n  com.urbanairship.Logger.info(Requesting a single update.);\n  if ((p7 == null) && (com.urbanairship.util.UAStringUtil.isEmpty(com.urbanairship.location.LocationService.access$300(this.this$0)))) {\n    com.urbanairship.location.LocationService.access$1100(this.this$0);\n    com.urbanairship.location.LocationService.access$400(this.this$0);\n  }\n  com.urbanairship.location.LocationService v0_2;\n  if (p7 != null) {\n    v0_2 = p7.getAccuracy();\n  } else {\n    v0_2 = com.urbanairship.location.LocationService.access$800(this.this$0).getAccuracy();\n  }\n  String v1_2;\n  if (p7 != null) {\n    v1_2 = com.urbanairship.location.LocationService.access$1200(this.this$0).getBestProvider(p7, 1);\n  } else {\n    v1_2 = com.urbanairship.location.LocationService.access$300(this.this$0);\n  }\n  if (com.urbanairship.util.UAStringUtil.isEmpty(v1_2)) {\n    com.urbanairship.Logger.debug(There are no available location providers. Retrieving last known location.);\n    com.urbanairship.location.LocationService.access$1500(this.this$0);\n  } else {\n    com.urbanairship.location.LocationService.access$1300(this.this$0, v0_2);\n    com.urbanairship.location.LocationService.access$1200(this.this$0).requestLocationUpdates(v1_2, 0, 0, \n      com.urbanairship.location.LocationService.access$1400(this.this$0));\n  }\n  return;\n}",
+          "/**\n * Class Name: com.biznessapps.components.LocationFinder;\n * Method Name: startSearching\n */\n\npublic void startSearching() {\n  this.locationManager.requestLocationUpdates(network, 120000, 0, this.networkLocationListener);\n  this.locationManager.requestLocationUpdates(gps, 120000, 0, this.gpsLocationListener);\n  return;\n}",
+          "/**\n * APK Name: Broome\n * Class Name: com.biznessapps.pushnotifications.C2DMMessagesReceiver;\n * Method Name: sendForSpecificArea        \n */\n\nprivate void sendForSpecificArea(android.content.Context p16, String p17, com.biznessapps.messages.MessageItem p18) {\n  try {\n    android.location.Location v4 = com.biznessapps.api.AppCore.getInstance().getLocationFinder().getCurrentLocation();\n  } catch (Exception v7) {\n    v7.printStackTrace();\n    return;\n  }\n  if (v4 == null) {\n    return;\n  } else {\n    boolean v8 = com.biznessapps.pushnotifications.GeoFencingHelper.isContainCoordinate(com.biznessapps.pushnotifications.GeoFencingHelper$GeoPoint.createList(p18.getPaths()), new com.biznessapps.pushnotifications.GeoFencingHelper$GeoPoint(v4.getLatitude(), v4.getLongitude()));\n    p18.setTitle(p17);\n    if (!v8) {\n      if (p18.getActiveTill() != 0) {\n        com.biznessapps.api.AppCore.getInstance().getLocationFinder().startSearching();\n      } else {\n        p18.setGeoFencingEnabled(0);\n      }\n    } else {\n      p18.setGeoFencingEnabled(0);\n      this = this.sendNotification(p16, p17, p18);\n    }\n    this.saveMessage(p18);\n    return;\n  }\n}",
+          "/**\n * APK Name: Broome\n * Class Name: com.biznessapps.pushnotifications.C2DMMessagesReceiver;\n * Method Name: checkGFmessages\n */\n\nprivate void checkGFmessages() {\n  java.util.List v4 = com.biznessapps.storage.StorageKeeper.instance().getMessages();\n  java.util.Iterator v2_1 = v4.iterator();\n  while (v2_1.hasNext()) {\n    com.biznessapps.messages.MessageItem v3_3 = ((com.biznessapps.messages.MessageItem) v2_1.next());\n    if (v3_3.isGeoFencingEnabled()) {\n      if (v3_3.getActiveTill() <= 0) {\n        if (this.context != null) {\n          this.sendForSpecificArea(this.context, v3_3.getTitle(), v3_3);\n        }\n      } else {\n        if (com.biznessapps.utils.DateUtils.getDateWithOffset(v3_3.getActiveTill()).getTime() <= System.currentTimeMillis()) {\n          v3_3.setGeoFencingEnabled(0);\n        } else {\n          if (this.context != null) {\n            this.sendForSpecificArea(this.context, v3_3.getTitle(), v3_3);\n          }\n        }\n      }\n    }\n  }\n  int v5 = 0;\n  java.util.Iterator v2_0 = v4.iterator();\n  while (v2_0.hasNext()) {\n    if (((com.biznessapps.messages.MessageItem) v2_0.next()).isGeoFencingEnabled()) {\n      v5 = 1;\n      break;\n    }\n  }\n  if (v5 == 0) {\n    com.biznessapps.api.AppCore.getInstance().getLocationFinder().stopSearching();\n  } else {\n    com.biznessapps.api.AppCore.getInstance().getLocationFinder().startSearching();\n  }\n  return;\n}",
+        ],
+      },
+      {
+        id: 2,
+        status: "incomplete",
+        annotation: "...",
+        sample_id: "sample_7",
+        app_name: "ArsenalVision",
+        class_name: "com.biznessapps.components.LocationFinder",
+        information_accessed: "network",
+        apis: [
+          [
+            "android.net.ConnectivityManager;getAllNetworkInfo",
+            "Returns connection status information about all network types supported by the device.",
+          ],
+        ],
+        practice: ["Sharing", "Collecting"],
+        purpose: ["Analytics"],
+        hops: [
+          "/**\n *APK Name: ArsenalVision\n *Class Name: com.bugsense.trace.Utils;\n *Method Name: CheckNetworkConnection\n */\n\nprivate static int CheckNetworkConnection(android.content.Context p6, String p7) {\n  int v0_2;\n  int v1 = 0;\n  if (p6.getPackageManager().checkPermission(android.permission.ACCESS_NETWORK_STATE, com.bugsense.trace.G.APP_PACKAGE) != 0) {\n    v0_2 = 2;\n  } else {\n    android.net.NetworkInfo[] v2_0 = ((android.net.ConnectivityManager) p6.getSystemService(connectivity)).getAllNetworkInfo();\n    v0_2 = 0;\n    while (v1 < v2_0.length) {\n      boolean v4_0 = v2_0[v1];\n      if ((v4_0.getTypeName().equalsIgnoreCase(p7)) && (v4_0.isConnected())) {\n        v0_2 = 1;\n      }\n      v1++;\n    }\n  }\n  return v0_2;\n}",
+          "/**\n * APK Name: ArsenalVision\n * Class Name: com.bugsense.trace.Utils;\n * Method Name: isWifiOn\n */\n\nprotected static int isWifiOn(android.content.Context p1) {\n  return com.bugsense.trace.Utils.CheckNetworkConnection(p1, WIFI);\n}",
+          "/**\n * APK Name: ArsenalVision\n * Class Name: com.bugsense.trace.Utils;\n * Method Name: setProperties\n */\npublic static void setProperties(android.content.Context p1) {\n  com.bugsense.trace.G.IS_WIFI_ON = com.bugsense.trace.Utils.isWifiOn(p1);\n  com.bugsense.trace.G.IS_MOBILENET_ON = com.bugsense.trace.Utils.isMobileNetworkOn(p1);\n  // Checks if GPS is on or not. \n  com.bugsense.trace.G.IS_GPS_ON = com.bugsense.trace.Utils.isGPSOn(p1);\n  com.bugsense.trace.G.SCREEN_PROPS = com.bugsense.trace.Utils.ScreenProperties(p1);\n  return;\n}",
+        ],
+      },
+      {
+        id: 3,
+        status: "incomplete",
+        annotation: "...",
+        sample_id: "sample_4",
+        app_name: "CrowdSpotter",
+        class_name:
+          "Class Name: com.carnationgroup.crowdspottr.Fetchers.EventsFetcher;",
+        information_accessed: "network",
+        apis: [
+          [
+            "android.net.ConnectivityManager;getAllNetworkInfo",
+            "Returns connection status information about all network types supported by the device.",
+          ],
+        ],
+        practice: ["Processing"],
+        purpose: ["Functionality", "Other"],
+        hops: [
+          "/**\n * APK Name: CrowdSpottr\n * Class Name: com.carnationgroup.crowdspottr.utils.CrowdSpottrUtils;\n * Method Name: isNetworkConnected\n */\n\npublic static boolean isNetworkConnected(android.content.Context p6, boolean p7) {\n  int v3_4;\n  android.net.ConnectivityManager v0_1 = ((android.net.ConnectivityManager) p6.getSystemService(connectivity));\n  if (v0_1 == null) {\n    if (p7) {\n      android.widget.Toast.makeText(p6, p6.getResources().getString(2131034123), 0).show();\n    }\n    v3_4 = 0;\n  } else {\n    android.net.NetworkInfo[] v2 = v0_1.getAllNetworkInfo();\n    if (v2 == null) {} else {\n      int v1 = 0;\n      while (v1 < v2.length) {\n        if (v2[v1].getState() != android.net.NetworkInfo$State.CONNECTED) {\n          v1++;\n        } else {\n          v3_4 = 1;\n        }\n      }\n    }\n  }\n  return v3_4;\n}",
+          '/**\n * APK Name: CrowdSpottr\n * Class Name: com.carnationgroup.crowdspottr.Fetchers.EventsFetcher;\n * Method Name: loadAllEvents\n */\n\nprivate void loadAllEvents() {\n    try {\n      if (!com.carnationgroup.crowdspottr.utils.CrowdSpottrUtils.isNetworkConnected(this.mContext, 0)) {\n        this.mHandler.post(this.showToast);\n      } else {\n        android.os.Bundle v6_0 = new android.os.Bundle();\n        v6_0.putString(batch, [{\n            "method": "GET",\n            "relative_url": "me/"\n            friends ? fields = id,\n            name,\n            birthday\n          },\n          {\n            "method": "GET",\n            "relative_url": "me/likes?fields=id"\n          }\n        ]);\n        org.json.JSONArray v7_1 = ((org.json.JSONArray) new org.json.JSONTokener(com.carnationgroup.crowdspottr.FacebookSingleton.getFacebook().request(/, v6_0, POST))\n              .nextValue()); this.ids.clear(); this.ids.add(me); org.json.JSONArray v2 = ((org.json.JSONObject) new org.json.JSONTokener(v7_1.getJSONObject(0).getString(body)).nextValue()).getJSONArray(data); int v4 = 0;\n            while (v4 < v2.length()) {\n              this.ids.add(v2.getJSONObject(v4).getString(id));\n              v4++;\n            }\n            this.loadEvents();\n          }\n        }\n        catch (java.util.ArrayList v10_21) {\n          v10_21.printStackTrace();\n        } catch (java.util.ArrayList v10_20) {\n          v10_20.printStackTrace();\n        } catch (java.util.ArrayList v10_19) {\n          v10_19.printStackTrace();\n        } catch (java.util.ArrayList v10_18) {\n          v10_18.printStackTrace();\n        } catch (java.util.ArrayList v10) {}\n        return;\n      }',
+          "/**\n * APK Name: CrowdSpottr\n * Class Name: com.carnationgroup.crowdspottr.Fetchers.EventsFetcher;\n * Method Name: run\n */\n\npublic void run() {\n  com.carnationgroup.crowdspottr.utils.Utility.setRefreshEventsThread(1);\n  this.loadAllEvents();\n  return;\n}",
         ],
       },
     ],

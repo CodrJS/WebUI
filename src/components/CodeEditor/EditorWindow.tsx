@@ -47,7 +47,6 @@ const EditorWindow = ({
           const errs = markers.filter(m => m.severity >= 8);
           const warns = markers.filter(m => m.severity == 4);
           const len = errs.length - 1;
-          console.log(markers);
           if (onWarning)
             onWarning(
               warns.length

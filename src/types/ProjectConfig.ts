@@ -24,7 +24,7 @@ export interface Output {
   type: OutputField;
   prompt?: string;
   range?: [number, number]; // [min, max]
-  options?: { key: string; value: string | number }[];
+  options?: string | { key: string; value: string | number }[];
 }
 
 export default interface ProjectConfig {

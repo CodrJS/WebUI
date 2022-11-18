@@ -2,17 +2,55 @@
  * @description Returns a "short-text" element to collect output data.
  */
 
+import { useMemo } from "react";
+import { Sample } from "types/Dataset";
 import { Output } from "types/ProjectConfig";
 import md from "utils/MarkdownIt";
+import traverse from "utils/traverse";
 
 export default function Radio({
   item,
   index,
+  sample,
 }: {
   item: Output;
   index: number;
+  sample: Sample;
 }) {
   const id = `prompt-radio-${index}`;
+
+  const options = useMemo(() => {
+    if (item.options) {
+      if (item.options instanceof Array) {
+        // do fun array stuff
+        return item.options;
+      } else if (typeof item.options === "string") {
+        // do fun string stuff
+        const samplePath = item.options.match(/(\$sample(\.[\w*[\]]+)*)/g);
+
+        if (samplePath !== null) {
+          const path = samplePath[0].split(".");
+          path.shift();
+          const result = traverse(path, sample).map((opt, idx) => ({
+            key: opt,
+            value: `${id}-${idx + 1}`,
+          }));
+          return result;
+        } else {
+          return [];
+        }
+      } else {
+        throw new Error(
+          `Expected options of ${id} to be a string or array, but found ${typeof item.options}`,
+        );
+      }
+    } else {
+      throw new Error(
+        `Expected ${id} to have a parameter "options," but found "undefined"`,
+      );
+    }
+  }, [id, item.options, sample]);
+
   return (
     <div className="flex-grow" key={id}>
       <label
@@ -24,7 +62,7 @@ export default function Radio({
       <fieldset className="mt-2">
         <legend className="sr-only"></legend>
         <div className="space-y-2">
-          {item.options?.map(option => (
+          {options?.map(option => (
             <div key={`${id}-${option.key}`} className="flex items-center">
               <input
                 id={`${id}-${option.key}`}

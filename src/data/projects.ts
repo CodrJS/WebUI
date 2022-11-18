@@ -86,71 +86,8 @@ const PROJECTS: (ProjectConfig & {
           type: "radio",
           prompt:
             "Which of the following privacy captions describe __how__ and __why__ personal information is used in the code snippet above?",
-          options: [
-            {
-              key: "We use your location (via network/GPS) for searching an area.",
-              value: 1,
-            },
-            {
-              key: "We use your location (via network/GPS) for geofencing.",
-              value: 2,
-            },
-            {
-              key: "We use your location to show messages.",
-              value: 3,
-            },
-            {
-              key: "We use your location for other purposes.",
-              value: 4,
-            },
-          ],
+          options: "$sample.options.[*]",
         },
-        // {
-        //   type: "radio",
-        //   prompt:
-        //     "Which of the following privacy captions describe __how__ and __why__ personal information is used in the code snippet above?",
-        //   options: [
-        //     {
-        //       key: "We collect your connection state for analytics purpose",
-        //       value: 1,
-        //     },
-        //     {
-        //       key: "We process your WiFi information for advertisement purpose.",
-        //       value: 2,
-        //     },
-        //     {
-        //       key: "We use location information for other purposes.",
-        //       value: 3,
-        //     },
-        //     {
-        //       key: "We collect your network information for advertisement purposes.",
-        //       value: 4,
-        //     },
-        //   ],
-        // },
-        // {
-        //   type: "radio",
-        //   prompt:
-        //     "Which of the following privacy captions describe __how__ and __why__ personal information is used in the code snippet above?",
-        //   options: [
-        //     {
-        //       key: "We collect your information from Facebook for advertisement purposes",
-        //       value: 1,
-        //     },
-        //     {
-        //       key: "We share your WiFi information with third-parties like Facebook.",
-        //       value: 2,
-        //     },
-        //     {
-        //       key: "We use network to make requests to websites such as Facebook.",
-        //       value: 3,
-        //     },
-        //     {
-        //       key: "We use network information for other purposes.",
-        //       value: 4,
-        //     },
-        //   ],
-        // },
       ],
     },
     sample: {
@@ -220,6 +157,12 @@ export const DATASETS = (project: project | ProjectConfig) => [
           "/**\n * APK Name: Broome\n * Class Name: com.biznessapps.pushnotifications.C2DMMessagesReceiver;\n * Method Name: sendForSpecificArea        \n */\n\nprivate void sendForSpecificArea(android.content.Context p16, String p17, com.biznessapps.messages.MessageItem p18) {\n  try {\n    android.location.Location v4 = com.biznessapps.api.AppCore.getInstance().getLocationFinder().getCurrentLocation();\n  } catch (Exception v7) {\n    v7.printStackTrace();\n    return;\n  }\n  if (v4 == null) {\n    return;\n  } else {\n    boolean v8 = com.biznessapps.pushnotifications.GeoFencingHelper.isContainCoordinate(com.biznessapps.pushnotifications.GeoFencingHelper$GeoPoint.createList(p18.getPaths()), new com.biznessapps.pushnotifications.GeoFencingHelper$GeoPoint(v4.getLatitude(), v4.getLongitude()));\n    p18.setTitle(p17);\n    if (!v8) {\n      if (p18.getActiveTill() != 0) {\n        com.biznessapps.api.AppCore.getInstance().getLocationFinder().startSearching();\n      } else {\n        p18.setGeoFencingEnabled(0);\n      }\n    } else {\n      p18.setGeoFencingEnabled(0);\n      this = this.sendNotification(p16, p17, p18);\n    }\n    this.saveMessage(p18);\n    return;\n  }\n}",
           "/**\n * APK Name: Broome\n * Class Name: com.biznessapps.pushnotifications.C2DMMessagesReceiver;\n * Method Name: checkGFmessages\n */\n\nprivate void checkGFmessages() {\n  java.util.List v4 = com.biznessapps.storage.StorageKeeper.instance().getMessages();\n  java.util.Iterator v2_1 = v4.iterator();\n  while (v2_1.hasNext()) {\n    com.biznessapps.messages.MessageItem v3_3 = ((com.biznessapps.messages.MessageItem) v2_1.next());\n    if (v3_3.isGeoFencingEnabled()) {\n      if (v3_3.getActiveTill() <= 0) {\n        if (this.context != null) {\n          this.sendForSpecificArea(this.context, v3_3.getTitle(), v3_3);\n        }\n      } else {\n        if (com.biznessapps.utils.DateUtils.getDateWithOffset(v3_3.getActiveTill()).getTime() <= System.currentTimeMillis()) {\n          v3_3.setGeoFencingEnabled(0);\n        } else {\n          if (this.context != null) {\n            this.sendForSpecificArea(this.context, v3_3.getTitle(), v3_3);\n          }\n        }\n      }\n    }\n  }\n  int v5 = 0;\n  java.util.Iterator v2_0 = v4.iterator();\n  while (v2_0.hasNext()) {\n    if (((com.biznessapps.messages.MessageItem) v2_0.next()).isGeoFencingEnabled()) {\n      v5 = 1;\n      break;\n    }\n  }\n  if (v5 == 0) {\n    com.biznessapps.api.AppCore.getInstance().getLocationFinder().stopSearching();\n  } else {\n    com.biznessapps.api.AppCore.getInstance().getLocationFinder().startSearching();\n  }\n  return;\n}",
         ],
+        options: [
+          "We use your location (via network/GPS) for searching an area.",
+          "We use your location (via network/GPS) for geofencing.",
+          "We use your location to show messages.",
+          "We use your location for other purposes.",
+        ],
       },
       {
         id: 2,
@@ -241,6 +184,12 @@ export const DATASETS = (project: project | ProjectConfig) => [
           "/**\n *APK Name: ArsenalVision\n *Class Name: com.bugsense.trace.Utils;\n *Method Name: CheckNetworkConnection\n */\n\nprivate static int CheckNetworkConnection(android.content.Context p6, String p7) {\n  int v0_2;\n  int v1 = 0;\n  if (p6.getPackageManager().checkPermission(android.permission.ACCESS_NETWORK_STATE, com.bugsense.trace.G.APP_PACKAGE) != 0) {\n    v0_2 = 2;\n  } else {\n    android.net.NetworkInfo[] v2_0 = ((android.net.ConnectivityManager) p6.getSystemService(connectivity)).getAllNetworkInfo();\n    v0_2 = 0;\n    while (v1 < v2_0.length) {\n      boolean v4_0 = v2_0[v1];\n      if ((v4_0.getTypeName().equalsIgnoreCase(p7)) && (v4_0.isConnected())) {\n        v0_2 = 1;\n      }\n      v1++;\n    }\n  }\n  return v0_2;\n}",
           "/**\n * APK Name: ArsenalVision\n * Class Name: com.bugsense.trace.Utils;\n * Method Name: isWifiOn\n */\n\nprotected static int isWifiOn(android.content.Context p1) {\n  return com.bugsense.trace.Utils.CheckNetworkConnection(p1, WIFI);\n}",
           "/**\n * APK Name: ArsenalVision\n * Class Name: com.bugsense.trace.Utils;\n * Method Name: setProperties\n */\npublic static void setProperties(android.content.Context p1) {\n  com.bugsense.trace.G.IS_WIFI_ON = com.bugsense.trace.Utils.isWifiOn(p1);\n  com.bugsense.trace.G.IS_MOBILENET_ON = com.bugsense.trace.Utils.isMobileNetworkOn(p1);\n  // Checks if GPS is on or not. \n  com.bugsense.trace.G.IS_GPS_ON = com.bugsense.trace.Utils.isGPSOn(p1);\n  com.bugsense.trace.G.SCREEN_PROPS = com.bugsense.trace.Utils.ScreenProperties(p1);\n  return;\n}",
+        ],
+        options: [
+          "We collect your connection state for analytics purpose",
+          "We process your WiFi information for advertisement purpose.",
+          "We use location information for other purposes.",
+          "We collect your network information for advertisement purposes.",
         ],
       },
       {
@@ -264,6 +213,12 @@ export const DATASETS = (project: project | ProjectConfig) => [
           "/**\n * APK Name: CrowdSpottr\n * Class Name: com.carnationgroup.crowdspottr.utils.CrowdSpottrUtils;\n * Method Name: isNetworkConnected\n */\n\npublic static boolean isNetworkConnected(android.content.Context p6, boolean p7) {\n  int v3_4;\n  android.net.ConnectivityManager v0_1 = ((android.net.ConnectivityManager) p6.getSystemService(connectivity));\n  if (v0_1 == null) {\n    if (p7) {\n      android.widget.Toast.makeText(p6, p6.getResources().getString(2131034123), 0).show();\n    }\n    v3_4 = 0;\n  } else {\n    android.net.NetworkInfo[] v2 = v0_1.getAllNetworkInfo();\n    if (v2 == null) {} else {\n      int v1 = 0;\n      while (v1 < v2.length) {\n        if (v2[v1].getState() != android.net.NetworkInfo$State.CONNECTED) {\n          v1++;\n        } else {\n          v3_4 = 1;\n        }\n      }\n    }\n  }\n  return v3_4;\n}",
           '/**\n * APK Name: CrowdSpottr\n * Class Name: com.carnationgroup.crowdspottr.Fetchers.EventsFetcher;\n * Method Name: loadAllEvents\n */\n\nprivate void loadAllEvents() {\n    try {\n      if (!com.carnationgroup.crowdspottr.utils.CrowdSpottrUtils.isNetworkConnected(this.mContext, 0)) {\n        this.mHandler.post(this.showToast);\n      } else {\n        android.os.Bundle v6_0 = new android.os.Bundle();\n        v6_0.putString(batch, [{\n            "method": "GET",\n            "relative_url": "me/"\n            friends ? fields = id,\n            name,\n            birthday\n          },\n          {\n            "method": "GET",\n            "relative_url": "me/likes?fields=id"\n          }\n        ]);\n        org.json.JSONArray v7_1 = ((org.json.JSONArray) new org.json.JSONTokener(com.carnationgroup.crowdspottr.FacebookSingleton.getFacebook().request(/, v6_0, POST))\n              .nextValue()); this.ids.clear(); this.ids.add(me); org.json.JSONArray v2 = ((org.json.JSONObject) new org.json.JSONTokener(v7_1.getJSONObject(0).getString(body)).nextValue()).getJSONArray(data); int v4 = 0;\n            while (v4 < v2.length()) {\n              this.ids.add(v2.getJSONObject(v4).getString(id));\n              v4++;\n            }\n            this.loadEvents();\n          }\n        }\n        catch (java.util.ArrayList v10_21) {\n          v10_21.printStackTrace();\n        } catch (java.util.ArrayList v10_20) {\n          v10_20.printStackTrace();\n        } catch (java.util.ArrayList v10_19) {\n          v10_19.printStackTrace();\n        } catch (java.util.ArrayList v10_18) {\n          v10_18.printStackTrace();\n        } catch (java.util.ArrayList v10) {}\n        return;\n      }',
           "/**\n * APK Name: CrowdSpottr\n * Class Name: com.carnationgroup.crowdspottr.Fetchers.EventsFetcher;\n * Method Name: run\n */\n\npublic void run() {\n  com.carnationgroup.crowdspottr.utils.Utility.setRefreshEventsThread(1);\n  this.loadAllEvents();\n  return;\n}",
+        ],
+        options: [
+          "We collect your information from Facebook for advertisement purposes",
+          "We share your WiFi information with third-parties like Facebook.",
+          "We use network to make requests to websites such as Facebook.",
+          "We use network information for other purposes.",
         ],
       },
     ],

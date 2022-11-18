@@ -13,11 +13,11 @@ const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
   const router = useRouter();
   const project = useProject();
   const dataset = useDataset();
-  const prompts = Outputs(project.display.outputs);
   const sample = dataset.samples.find(
     s => s.id.toString() === params.annotation,
   ) as unknown as Sample;
   const displays = Inputs(project.display.inputs, sample);
+  const prompts = Outputs(project.display.outputs, sample);
 
   const hasPrev = dataset.samples.findIndex(s => sample.id === s.id) - 1 >= 0;
   const hasNext =
@@ -26,12 +26,16 @@ const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
 
   const prev = () => {
     const index = dataset.samples.findIndex(s => sample.id === s.id) - 1;
-    router.push(`/project/${project.general.slug}/${dataset.slug}/${dataset.samples[index].id}`);
+    router.push(
+      `/project/${project.general.slug}/${dataset.slug}/${dataset.samples[index].id}`,
+    );
   };
 
   const next = () => {
     const index = dataset.samples.findIndex(s => sample.id === s.id) + 1;
-    router.push(`/project/${project.general.slug}/${dataset.slug}/${dataset.samples[index].id}`);
+    router.push(
+      `/project/${project.general.slug}/${dataset.slug}/${dataset.samples[index].id}`,
+    );
   };
 
   return (

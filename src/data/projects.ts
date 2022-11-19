@@ -108,22 +108,16 @@ const PROJECTS: (ProjectConfig & {
               maxItems: 2,
             },
           },
-          apis2: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                called: { type: "string" },
-                description: { type: "string" },
-              },
-            },
-          },
           hops: {
             type: "array",
             items: { type: "string" },
           },
+          options: {
+            type: "array",
+            items: { type: "string" },
+          },
         },
-        required: ["sample_id", "apis", "hops"],
+        required: ["sample_id", "apis", "hops", "options"],
       },
     },
   },

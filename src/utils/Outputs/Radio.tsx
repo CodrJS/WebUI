@@ -5,6 +5,7 @@
 import { useMemo } from "react";
 import { Sample } from "types/Dataset";
 import { Output } from "types/ProjectConfig";
+import findAndReplace from "utils/findAndReplace";
 import md from "utils/MarkdownIt";
 import traverse from "utils/traverse";
 
@@ -18,14 +19,16 @@ export default function Radio({
   sample: Sample;
 }) {
   const id = `prompt-radio-${index}`;
-
+  const prompt = useMemo(() => {
+    if (item.prompt) {
+      return findAndReplace(item.prompt, sample, /(\$sample(\.[\w*[\]]+)*)/g);
+    }
+  }, [item.prompt, sample]);
   const options = useMemo(() => {
     if (item.options) {
       if (item.options instanceof Array) {
-        // do fun array stuff
         return item.options;
       } else if (typeof item.options === "string") {
-        // do fun string stuff
         const samplePath = item.options.match(/(\$sample(\.[\w*[\]]+)*)/g);
 
         if (samplePath !== null) {
@@ -56,7 +59,7 @@ export default function Radio({
       <label
         className="block font-medium text-gray-700"
         dangerouslySetInnerHTML={{
-          __html: item.prompt ? md.render(item.prompt) : "",
+          __html: prompt ? md.render(prompt) : "",
         }}
       />
       <fieldset className="mt-2">

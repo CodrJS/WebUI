@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  swcMinify: false,
+  swcMinify: true,
   compiler: {
-    // removeConsole: {
-    //   exclude: ["error", "warn"],
-    // },
+    removeConsole: {
+      exclude: ["error", "warn"],
+    },
   },
   env: {
     NEXT_PUBLIC_ORG_NAME: process.env.NEXT_PUBLIC_ORG_NAME, // try this???

@@ -67,7 +67,10 @@ const AnnotationPage = ({ params }: { params: { annotation: string } }) => {
           onChange={e => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            console.log(e.target.name, e.target.value);
+            const type = e.target.type;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            console.log({type, name: e.target.name, value: e.target.value, checked: type === "checkbox" ? e.target.checked : undefined});
           }}
           className={"flex flex-col gap-4"}
         >

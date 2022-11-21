@@ -4,6 +4,7 @@
 
 import { Sample } from "types/Dataset";
 import { Input } from "types/ProjectConfig";
+import findAndReplace from "utils/findAndReplace";
 import md from "utils/MarkdownIt";
 import traverse from "utils/traverse";
 import Collapse from "./Collapse";
@@ -27,24 +28,9 @@ export default function Inputs(items: Input[], sample: Sample) {
 
     if (format) {
       // if a format is given
-
-      // get all value paths from the format
-      const valuePaths = format.match(/(\$value(\.[\w*[\]]+)*)/g);
-
       for (const val of value as any[]) {
-        if (valuePaths) {
-          // if paths exist, for each path, replace the value(s)
-          for (const valuePath of valuePaths) {
-            const path = valuePath.split(".");
-            path.shift();
-            const result = traverse(path, val);
-            if (result.length === 1) {
-              format = format.replace(valuePath, result[0].toString());
-            }
-          }
-        }
-        // pass formated string to the UI.
-        inputs.push(format);
+        inputs.push(findAndReplace(format, val, /(\$value(\.[\w*[\]]+)*)/g));
+
         // reset formated string.
         format = `${item.format}`;
       }

@@ -6,7 +6,7 @@ export default function findAndReplace(
   regex: RegExp,
 ) {
   // get all value paths from the format
-  const input = `${format}`;
+  let input = `${format}`;
   const paths = input.match(regex);
 
   if (paths) {
@@ -16,10 +16,13 @@ export default function findAndReplace(
       curr.shift();
       const result = traverse(curr, obj);
       if (result.length === 1) {
-        format = format.replace(path, result[0].toString());
+        input = input.replaceAll(path, result[0].toString());
+      } else {
+        // WRITE FOR MULTIPLE RESULTS??
       }
     }
   }
+
   // pass formated string to the UI.
   return input;
 }

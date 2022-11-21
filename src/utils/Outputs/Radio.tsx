@@ -5,7 +5,6 @@
 import { useMemo } from "react";
 import { Sample } from "types/Dataset";
 import { Output } from "types/ProjectConfig";
-import findAndReplace from "utils/findAndReplace";
 import md from "utils/MarkdownIt";
 import traverse from "utils/traverse";
 
@@ -19,11 +18,6 @@ export default function Radio({
   sample: Sample;
 }) {
   const id = `prompt-radio-${index}`;
-  const prompt = useMemo(() => {
-    if (item.prompt) {
-      return findAndReplace(item.prompt, sample, /(\$sample(\.[\w*[\]]+)*)/g);
-    }
-  }, [item.prompt, sample]);
   const options = useMemo(() => {
     if (item.options) {
       if (item.options instanceof Array) {
@@ -35,8 +29,8 @@ export default function Radio({
           const path = samplePath[0].split(".");
           path.shift();
           const result = traverse(path, sample).map((opt, idx) => ({
-            key: opt,
-            value: `${id}-${idx + 1}`,
+            key: `${id}-${idx + 1}`,
+            value: opt,
           }));
           return result;
         } else {
@@ -59,29 +53,32 @@ export default function Radio({
       <label
         className="block font-medium text-gray-700"
         dangerouslySetInnerHTML={{
-          __html: prompt ? md.render(prompt) : "",
+          __html: item.prompt ? md.render(item.prompt) : "",
         }}
       />
       <fieldset className="mt-2">
         <legend className="sr-only"></legend>
         <div className="space-y-2">
-          {options?.map(option => (
-            <div key={`${id}-${option.key}`} className="flex items-center">
-              <input
-                id={`${id}-${option.key}`}
-                name={id}
-                type="radio"
-                value={option.value}
-                className="h-4 w-4 border-gray-300 text-sky-600 focus:ring-sky-500"
-              />
-              <label
-                htmlFor={`${id}-${option.key}`}
-                className="ml-3 block text-gray-700"
-              >
-                {option.key}
-              </label>
-            </div>
-          ))}
+          {options.map(option => {
+            console.log(option);
+            return (
+              <div key={option.key} className="flex items-center">
+                <input
+                  id={option.key}
+                  name={id}
+                  type="radio"
+                  value={option.value}
+                  className="h-4 w-4 border-gray-300 text-sky-600 focus:ring-sky-500"
+                />
+                <label
+                  htmlFor={option.key}
+                  className="ml-3 block text-gray-700"
+                >
+                  {option.value}
+                </label>
+              </div>
+            );
+          })}
         </div>
       </fieldset>
     </div>

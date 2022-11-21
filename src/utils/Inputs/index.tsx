@@ -24,6 +24,9 @@ export default function Inputs(items: Input[], sample: Sample) {
       const path = modelPaths[0].split(".");
       path.shift();
       value = traverse(path, sample);
+    } else if (value === "undefined") {
+      // default value to $sample
+      value = [sample];
     }
 
     if (format) {
@@ -51,11 +54,7 @@ export default function Inputs(items: Input[], sample: Sample) {
             <div
               className="flex-grow"
               dangerouslySetInnerHTML={{
-                __html: md.render(
-                  item.type === "code"
-                    ? `\`\`\`${item?.language}\n${text}\n\`\`\``
-                    : text,
-                ),
+                __html: md.render(text),
               }}
             />
           </Collapse>,
@@ -65,11 +64,7 @@ export default function Inputs(items: Input[], sample: Sample) {
           <div
             className="prose prose-p:mb-0 prose-p:mt-0 border border-gray-200 rounded-lg py-2 px-4 shadow-sm max-w-full"
             dangerouslySetInnerHTML={{
-              __html: md.render(
-                item.type === "code"
-                  ? `\`\`\`${item?.language}\n${text}\n\`\`\``
-                  : text,
-              ),
+              __html: md.render(text),
             }}
           />,
         );

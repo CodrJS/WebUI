@@ -8,7 +8,7 @@ const nextConfig = {
     // },
   },
   env: {
-    NEXT_PUBLIC_ORG_NAME: process.env.ORG_NAME, // try this???
+    NEXT_PUBLIC_ORG_NAME: process.env.NEXT_PUBLIC_ORG_NAME, // try this???
   },
   experimental: {
     appDir: true,

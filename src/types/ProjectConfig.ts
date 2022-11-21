@@ -2,7 +2,7 @@ import { BgColorType } from "types/Colors";
 
 // classification and translation to be implemented first
 type TaskType = "classification" | "tagging" | "code-tagging" | "translation";
-type InputField = "text" | "code";
+type InputField = "text";
 type OutputField =
   | "short-text"
   | "long-text"
@@ -13,8 +13,7 @@ type OutputField =
 // what the researchers provide to display to users
 export interface Input {
   type: InputField;
-  language?: string;
-  value: string;
+  value?: string;
   format?: string;
   collapsible?: boolean;
 }

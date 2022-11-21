@@ -18,7 +18,7 @@ const defaultCode = `{
     "inputs": [
       {
         "type": "text",
-        "value": "Text displayed to annotator"
+        "format": "Text displayed to annotator"
       }
     ],
     "outputs": [
@@ -27,13 +27,22 @@ const defaultCode = `{
       }
     ]
   },
-  "model": {
-    "type": "object",
-    "properties": {
-      "type": { "type": "string" },
-      "_id": { "type": "string" }
-    },
-    "required": ["type", "_id"]
+  "sample": {
+    "model": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "_id"
+      ]
+    }
   }
 }`;
 

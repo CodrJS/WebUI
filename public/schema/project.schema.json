@@ -42,19 +42,24 @@
             "type": "object",
             "properties": {
               "type": {
-                "enum": ["text", "code"],
+                "enum": ["text"],
                 "description": "Type of data to be displayed. Use `code` to enable highlighting."
-              },
-              "language": {
-                "type": "string",
-                "description": "Language is used to provide code highlighting."
               },
               "value": {
                 "type": "string",
-                "description": "Location of the data or a hard-typed value to display."
+                "pattern": "^(\\$sample(.[\\w*[\\]]+)*)$",
+                "description": "Location of the data in the sample to use in the formatted string."
+              },
+              "format": {
+                "type": "string",
+                "description": "Text to display, can include data from value using $value dot notation."
+              },
+              "collapsible": {
+                "type": "boolean",
+                "description": "Whether or not to display the input in a collapsible UI component."
               }
             },
-            "required": ["type", "value"],
+            "required": ["type"],
             "minItems": 1,
             "exclusiveMinimum": 1
           }
@@ -75,13 +80,34 @@
                 ],
                 "description": "The type of output expected from the user."
               },
+              "prompt": {
+                "type": "string",
+                "description": "Prompt for output item; $sample dot notation available, Markdown support."
+              },
               "range": {
                 "type": "array",
                 "items": { "type": "integer" },
                 "minItems": 2,
                 "maxItems": 2,
                 "description": "If type is range, then a 2-tuple is expected; [min, max]",
-                "default": []
+                "default": [1, 10]
+              },
+              "options": {
+                "type": ["string", "array"],
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": { "type": "string" },
+                    "value": { "type": "string" }
+                  }
+                },
+                "minItems": 2,
+                "pattern": "^(\\$sample(.[\\w*[\\]]+)*)$",
+                "description": "A location to options in the $sample, or, an array of key-value pairs.",
+                "default": [
+                  { "key": "prompt-1-opt-1", "value": "Option 1" },
+                  { "key": "prompt-1-opt-2", "value": "Option 2" }
+                ]
               }
             },
             "required": ["type"],
@@ -91,11 +117,16 @@
       },
       "required": ["inputs", "outputs"]
     },
-    "model": {
-      "$ref": "https://json-schema.org/draft/2020-12/schema",
-      "description": "Project dataset sample format, used for data validation and referencing.",
-      "required": ["type"]
+    "sample": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "$ref": "https://json-schema.org/draft/2020-12/schema",
+          "description": "Project dataset sample format, used for data validation and referencing.",
+          "required": ["type"]
+        }
+      }
     }
   },
-  "required": ["general", "display", "model"]
+  "required": ["general", "display", "sample"]
 }

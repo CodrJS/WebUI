@@ -4,6 +4,7 @@
 
 import { useState } from "react";
 import { Output } from "types/ProjectConfig";
+import md from "utils/MarkdownIt";
 
 export default function Range({
   item,
@@ -19,9 +20,13 @@ export default function Range({
   );
   return (
     <div className="flex-grow" key={id}>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
-        {item.prompt}
-      </label>
+      <label
+        htmlFor={id}
+        className="block font-medium text-gray-700"
+        dangerouslySetInnerHTML={{
+          __html: item.prompt ? md.render(item.prompt) : "",
+        }}
+      />
       <div className="flex items-center gap-2 mt-1">
         <span className="min-w-[2rem] text-center">{value}</span>
         <input

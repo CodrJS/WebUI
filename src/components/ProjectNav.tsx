@@ -15,7 +15,7 @@ export default function ProjectNav({ datasets }: { datasets?: INavItem[] }) {
   const currentRoute = usePathname() as string;
   return (
     <nav
-      className="space-y-1 lg:w-64 lg:border-r lg:border-gray-200 lg:bg-gray-50 lg:py-4 lg:px-3"
+      className="space-y-1 border-b lg:w-64 lg:border-b-0 lg:border-r border-gray-200 bg-gray-50 py-2 px-3 lg:py-4"
       aria-label="Sidebar"
     >
       <div className="space-y-1 flex flex-col lg:sticky lg:top-4">

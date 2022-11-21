@@ -3,6 +3,7 @@
  */
 
 import { Output } from "types/ProjectConfig";
+import md from "utils/MarkdownIt";
 
 export default function ShortText({
   item,
@@ -14,9 +15,13 @@ export default function ShortText({
   const id = `prompt-short-text-${index}`;
   return (
     <div className="flex-grow" key={id}>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
-        {item.prompt}
-      </label>
+      <label
+        htmlFor={id}
+        className="block font-medium text-gray-700"
+        dangerouslySetInnerHTML={{
+          __html: item.prompt ? md.render(item.prompt) : "",
+        }}
+      />
       <input
         type="text"
         name={id}

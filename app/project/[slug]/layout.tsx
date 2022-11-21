@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
-import { PropsWithChildren, useMemo } from "react";
-import ProjectNav from "components/ProjectNav";
-import PROJECTS, { DATASETS } from "data/projects";
+import { PropsWithChildren, useMemo, useState } from "react";
+import PROJECTS from "data/projects";
 import { ProjectProvider } from "utils/contexts/ProjectContext";
 import ProjectHeader from "components/ProjectHeader";
+import SlideOver from "components/SlideOver";
+import md from "utils/MarkdownIt";
+import Button from "components/Button";
 
 export default function ProjectLayout({
   params,
@@ -20,31 +22,34 @@ export default function ProjectLayout({
     });
     return result;
   }, [params]);
-  const datasets = useMemo(() => {
-    return project ? DATASETS(project) : undefined;
-  }, [project]);
+  const [open, setOpen] = useState(false);
+
+  function togglePanel() {
+    setOpen(!open);
+  }
 
   return (
     <ProjectProvider value={project}>
+      <SlideOver open={open} toggleOpen={togglePanel} title="Guidelines" wide>
+        <div
+          className="prose lg:prose-md prose-code:not-prose"
+          dangerouslySetInnerHTML={{
+            __html: project ? md.render(project.general.guidelines) : "",
+          }}
+        />
+      </SlideOver>
       {/* Page title & actions */}
       <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <ProjectHeader />
-        <div className="mt-4 flex sm:mt-0 sm:ml-4">
-          <Link
-            href={`/project/${params.slug}/settings`}
-            className="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:ml-0"
-          >
-            Settings
+        <div className="mt-4 flex sm:mt-0 sm:ml-4 gap-2">
+          <Link href={`/project/${params.slug}/settings`}>
+            <Button primary={false}>Settings</Button>
           </Link>
+          <Button onClick={togglePanel}>Guidelines</Button>
         </div>
       </div>
       {/** PROJECT DATASET LAYOUT */}
-      <div className="flex flex-col lg:flex-row lg:flex-1">
-        <ProjectNav datasets={datasets} />
-        <div className="flex flex-col py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 flex-1">
-          {children}
-        </div>
-      </div>
+      <div className="flex flex-col flex-grow">{children}</div>
     </ProjectProvider>
   );
 }

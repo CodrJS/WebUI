@@ -14,9 +14,13 @@ export default function findAndReplace(
     for (const path of paths) {
       const curr = path.split(".");
       curr.shift();
-      const result = traverse(curr, obj);
-      if (result.length === 1) {
-        input = input.replaceAll(path, result[0].toString());
+      const result = traverse(curr, obj)[0];
+      if (result) {
+        if (typeof result?.index === "number") {
+          input = input.replaceAll(path, result.value);
+        } else {
+          input = input.replaceAll(path, result.toString());
+        }
       } else {
         // WRITE FOR MULTIPLE RESULTS??
       }

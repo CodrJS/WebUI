@@ -25,19 +25,28 @@ export default function Outputs(items: Output[], sample: Sample) {
 
     switch (item.type) {
       case "short-text":
-        out.push(<ShortText item={item} index={i} />);
+        out.push(<ShortText item={item} index={i} key={`output-${i}`} />);
         break;
       case "long-text":
-        out.push(<LongText item={item} index={i} />);
+        out.push(<LongText item={item} index={i} key={`output-${i}`} />);
         break;
       case "radio":
-        out.push(<Radio item={item} index={i} sample={sample} />);
+        out.push(
+          <Radio item={item} index={i} sample={sample} key={`output-${i}`} />,
+        );
         break;
       case "range":
-        out.push(<Range item={item} index={i} />);
+        out.push(<Range item={item} index={i} key={`output-${i}`} />);
         break;
       case "multiple-choice":
-        out.push(<Checkboxes item={item} index={i} sample={sample} />);
+        out.push(
+          <Checkboxes
+            item={item}
+            index={i}
+            sample={sample}
+            key={`output-${i}`}
+          />,
+        );
         break;
     }
   }

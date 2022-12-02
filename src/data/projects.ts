@@ -61,18 +61,19 @@ const PROJECTS: (ProjectConfig & {
           value: "$sample.hops.[*]",
           format: "```java\n$value\n```",
           collapsible: true,
-        },
-        {
-          type: "text",
-          value: "$sample",
-          format:
-            "**App name:** $value.app_name\n\n**Class name:** `$value.class_name`\n\n**Information Accessed:** $value.information_accessed",
+          header: "Hop $index",
         },
         {
           type: "text",
           value: "$sample",
           format:
             "**Practice:** $value.practice\n\n**Purpose:** $value.purpose",
+        },
+        {
+          type: "text",
+          value: "$sample",
+          format:
+            "### Metadata\n**App name:** $value.app_name\n\n**Class name:** `$value.class_name`\n\n**Information Accessed:** $value.information_accessed",
         },
         {
           type: "text",

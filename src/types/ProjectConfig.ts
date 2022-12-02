@@ -16,6 +16,7 @@ export interface Input {
   value?: string;
   format?: string;
   collapsible?: boolean;
+  header?: string;
 }
 
 // where the user provides their annotation

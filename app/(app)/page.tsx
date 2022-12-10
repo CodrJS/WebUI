@@ -75,9 +75,9 @@ const Home = () => {
                   >
                     {project.general.title}
                   </Link>
-                  <p className="text-gray-500">
+                  {/* <p className="text-gray-500">
                     {project.general.totalMembers} Members
-                  </p>
+                  </p> */}
                 </div>
                 <Menu as="div" className="flex-shrink-0 pr-2">
                   <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
@@ -206,12 +206,12 @@ const Home = () => {
                 >
                   <span className="lg:pl-2">Project</span>
                 </th>
-                <th
+                {/* <th
                   className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
                   scope="col"
                 >
                   Members
-                </th>
+                </th> */}
                 <th
                   className="hidden border-b border-gray-200 bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900 md:table-cell"
                   scope="col"
@@ -249,7 +249,7 @@ const Home = () => {
                       </a>
                     </div>
                   </td>
-                  <td className="px-6 py-3 text-sm font-medium text-gray-500">
+                  {/* <td className="px-6 py-3 text-sm font-medium text-gray-500">
                     <div className="flex items-center space-x-2">
                       <div className="flex flex-shrink-0 -space-x-1">
                         {project.general.members.map(member => (
@@ -271,7 +271,7 @@ const Home = () => {
                         </span>
                       ) : null}
                     </div>
-                  </td>
+                  </td> */}
                   <td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
                     {project.general.lastModified}
                   </td>

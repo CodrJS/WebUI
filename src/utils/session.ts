@@ -1,5 +1,6 @@
 import { unsealData } from "iron-session";
 import { ReadonlyRequestCookies } from "next/dist/server/app-render";
+import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 
 export interface User {
   _id: string;
@@ -16,7 +17,7 @@ export interface User {
  * @returns SessionUser or null
  */
 export async function getRequestCookie(
-  cookies: ReadonlyRequestCookies,
+  cookies: ReadonlyRequestCookies | RequestCookies,
 ): Promise<User | undefined> {
   const cookie = cookies.get("codr-session");
 

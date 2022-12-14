@@ -1,50 +1,55 @@
-// import { FormEvent } from "react";
-// import axios, { AxiosError } from "axios";
 "use client";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import setup from "utils/axios/Setup";
 import { User } from "utils/session";
 
 export interface SetupFormData {
-  "first-name": string;
-  "last-name": string;
-  nickname?: string;
+  first: string;
+  last: string;
+  preferred?: string;
+  username: string;
 }
 
 export default function SetupForm({ user }: { user: User }) {
-  // const submitSignin = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+  const [errors, setErrors] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState(false);
 
-  //   axios
-  //     .post<IResponse>("/api/v1/auth/email", data)
-  //     .then(res => {
-  //       setStatus({ type: "success", message: res.data.detail.message });
-  //     })
-  //     .catch((e: AxiosError<IResponse>) => {
-  //       setStatus({
-  //         type: "error",
-  //         message:
-  //           e.response?.data.detail.message ||
-  //           "An unexpected error occured. Please contact your Codr administrator.",
-  //       });
-  //     });
-  // };
+  useEffect(() => {
+    if (success) redirect("/");
+  }, [success]);
 
   return (
     <form
       className="space-y-8 divide-y divide-gray-200"
-      onSubmit={e => {
+      onSubmit={async e => {
         e.preventDefault();
 
-        // get data from form as SignInData (see type declaration above)
-        const data = Object.fromEntries(
-          new FormData(e.currentTarget),
-        ) as unknown as SetupFormData;
+        setLoading(true);
 
-        console.warn(data);
+        // get data from form as SignInData (see type declaration above)
+        const data = new FormData(e.currentTarget);
+
+        const { errors: errs } = await setup(data);
+
+        setLoading(false);
+
+        if (errs?.length) setErrors(errs);
+        else setSuccess(true);
       }}
     >
       <div className="space-y-8 divide-y divide-gray-200">
         <div className="pt-8">
+          {errors.length ? (
+            <div className="mb-6">
+              {errors.map((v, i) => (
+                <p key={`err-${i}`} className="text-red-700">
+                  {v}
+                </p>
+              ))}
+            </div>
+          ) : null}
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Personal Information
@@ -56,7 +61,7 @@ export default function SetupForm({ user }: { user: User }) {
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                htmlFor="first-name"
+                htmlFor="first"
                 className="block text-sm font-medium text-gray-700"
               >
                 First name
@@ -64,8 +69,9 @@ export default function SetupForm({ user }: { user: User }) {
               <div className="mt-1">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="first"
+                  id="first"
+                  placeholder="Jonathan"
                   autoComplete="given-name"
                   className="shadow-sm focus:ring-sky-500 focus:border-sky-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   required
@@ -75,7 +81,7 @@ export default function SetupForm({ user }: { user: User }) {
 
             <div className="sm:col-span-3">
               <label
-                htmlFor="last-name"
+                htmlFor="last"
                 className="block text-sm font-medium text-gray-700"
               >
                 Last name
@@ -83,8 +89,9 @@ export default function SetupForm({ user }: { user: User }) {
               <div className="mt-1">
                 <input
                   type="text"
-                  name="last-name"
-                  id="last-name"
+                  name="last"
+                  id="last"
+                  placeholder="Doe"
                   autoComplete="family-name"
                   className="shadow-sm focus:ring-sky-500 focus:border-sky-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   required
@@ -94,7 +101,7 @@ export default function SetupForm({ user }: { user: User }) {
 
             <div className="sm:col-span-6">
               <label
-                htmlFor="nickname"
+                htmlFor="preferred"
                 className="block text-sm font-medium text-gray-700"
               >
                 Preferred name{" "}
@@ -105,8 +112,9 @@ export default function SetupForm({ user }: { user: User }) {
               <div className="mt-1">
                 <input
                   type="text"
-                  id="nickname"
-                  name="nickname"
+                  id="preferred"
+                  name="preferred"
+                  placeholder="Jon"
                   autoComplete="nickname"
                   className="shadow-sm focus:ring-sky-500 focus:border-sky-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 />
@@ -131,6 +139,7 @@ export default function SetupForm({ user }: { user: User }) {
                   name="username"
                   id="username"
                   autoComplete="username"
+                  placeholder="JonDoe"
                   className="focus:ring-sky-500 focus:border-sky-500 block w-full sm:text-sm border-gray-300 rounded-r-md"
                   required
                 />
@@ -165,9 +174,10 @@ export default function SetupForm({ user }: { user: User }) {
         <div className="flex justify-end">
           <button
             type="submit"
+            disabled={loading}
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
           >
-            Save & Continue
+            {loading ? "Saving..." : "Save & Continue"}
           </button>
         </div>
       </div>

@@ -1,7 +1,8 @@
 "use client";
 import { FormEvent, useState } from "react";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import classNames from "utils/classNames";
+import signin from "utils/axios/Signin";
 
 interface IStatus {
   type: "success" | "error";
@@ -19,10 +20,9 @@ export default function SigninPage() {
 
   const submitSignin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const data = new FormData(e.currentTarget);
 
-    axios
-      .post<IResponse>("/api/v1/auth/email", data)
+    signin(data)
       .then(res => {
         setStatus({ type: "success", message: res.data.detail.message });
       })

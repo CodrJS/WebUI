@@ -8,9 +8,10 @@ export default async function SigninLayout({
 }: React.PropsWithChildren) {
   const user = await getRequestCookie(cookies());
 
-  // Prevent non logged user to access application
-  if (user && !user.name) {
-    redirect("/setup");
+  // If logged in; redirect to the correct page
+  if (user) {
+    if (!user.name) redirect("/setup");
+    else redirect("/");
   }
 
   return (

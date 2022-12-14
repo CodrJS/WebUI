@@ -1,25 +1,14 @@
 import SetupForm from "components/SetupForm";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { getRequestCookie, User } from "utils/session";
-
-export interface SetupFormData {
-  "first-name": string;
-  "last-name": string;
-  nickname?: string;
-}
 
 export default async function SetupPage() {
   const user = await getRequestCookie(cookies());
 
-  if (!user) {
-    redirect("/signin");
-  }
-
   return (
     <div className="min-h-max flex flex-col py-12 sm:px-6 lg:px-8">
       <div className="my-8 sm:mx-auto sm:w-full sm:max-w-2xl">
-        <h1 className="font-bold text-3xl text-sky-600 text-center">Codr</h1>
+        <h1 className="font-bold text-3xl text-sky-600 text-center">Welcome to Codr</h1>
         <h2 className="mt-4 text-center text-3xl font-extrabold text-gray-900">
           First-time Setup
         </h2>

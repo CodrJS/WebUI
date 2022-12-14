@@ -15,13 +15,13 @@ const setup = async function setup(data: FormData) {
   const errors: string[] = [];
 
   try {
-    await instance.post("/me/profile", profile);
+    await instance.patch("/me/profile", profile);
   } catch (e: any) {
     errors.push(e.response.data?.message);
   }
 
   try {
-    await instance.post("/me/user", { name: form });
+    await instance.patch("/me/user", { name: form });
   } catch (e: any) {
     if (errors.find(v => v !== e.response.data?.message))
       errors.push(e.response.data?.message);

@@ -7,7 +7,7 @@ import { Input } from "types/ProjectConfig";
 import findAndReplace from "utils/findAndReplace";
 import md from "utils/MarkdownIt";
 import traverse from "utils/traverse";
-import Collapse from "./Collapse";
+import Collapse from "components/Collapse";
 
 export default function Inputs(items: Input[], sample: Sample) {
   const out: [JSX.Element[], JSX.Element[]] = [[], []];

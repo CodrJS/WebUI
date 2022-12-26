@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import setup from "utils/axios/Setup";
 import { User } from "utils/session";
+import Button from "./Button";
 
 export interface SetupFormData {
   first: string;
@@ -172,13 +173,9 @@ export default function SetupForm({ user }: { user: User }) {
 
       <div className="pt-5">
         <div className="flex justify-end">
-          <button
-            type="submit"
-            disabled={loading}
-            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-          >
+          <Button disabled={loading} type="submit">
             {loading ? "Saving..." : "Save & Continue"}
-          </button>
+          </Button>
         </div>
       </div>
     </form>

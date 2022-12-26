@@ -1,13 +1,15 @@
 // import { useEffect } from "react";
 
+import Link from "next/link";
+
 export default function NotFound() {
   // useEffect(() => {
-    // Log the error to an error reporting service
-    // console.error(error);
+  // Log the error to an error reporting service
+  // console.error(error);
   // }, [error]);
 
   return (
-    <div className="flex min-h-full flex-col bg-white pt-16 pb-12">
+    <div className="flex min-h-full flex-col bg-white pt-16 pb-12 w-full">
       <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-4 sm:px-6 lg:px-8">
         <div className="flex flex-shrink-0 justify-center">
           {/* <a href="/" className="inline-flex">
@@ -29,13 +31,13 @@ export default function NotFound() {
               Sorry, we couldn&apos;t find the page you&apos;re looking for.
             </p>
             <div className="mt-6">
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="text-base font-medium text-sky-600 hover:text-sky-500"
               >
                 Go back home
                 <span aria-hidden="true"> &rarr;</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -48,11 +50,11 @@ export default function NotFound() {
           >
             Contact Support
           </a>
-          <span
+          {/*<span
             className="inline-block border-l border-gray-300"
             aria-hidden="true"
           />
-          {/* <a
+          <a
             href="#"
             className="text-sm font-medium text-gray-500 hover:text-gray-600"
           >

@@ -10,7 +10,7 @@ export default async function SigninLayout({
 
   // If logged in; redirect to the correct page
   if (user) {
-    if (!user.name) redirect("/setup");
+    if (!user.name && !user.flags.isAnonymous) redirect("/setup");
     else redirect("/");
   }
 

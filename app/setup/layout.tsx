@@ -11,7 +11,7 @@ export default async function SetupLayout({
   // Prevent non logged user to access application
   if (!user) {
     redirect("/signin");
-  } else if (user.name) {
+  } else if (user.name && !user.flags.isAnonymous) {
     redirect("/");
   }
 

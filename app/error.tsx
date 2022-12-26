@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function Error({
@@ -37,13 +38,13 @@ export default function Error({
               Sorry, we couldn&apos;t find the page you&apos;re looking for.
             </p>
             <div className="mt-6">
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="text-base font-medium text-sky-600 hover:text-sky-500"
               >
                 Go back home
                 <span aria-hidden="true"> &rarr;</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -3,6 +3,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import classNames from "utils/classNames";
+import { useProfile } from "utils/contexts/ProfileContext";
+import Link from "next/link";
 
 export default function SearchHeader({
   sidebar,
@@ -12,8 +14,11 @@ export default function SearchHeader({
     setOpen: Dispatch<SetStateAction<boolean>>;
   };
 }) {
+  const [profile] = useProfile();
+  const name = profile?.user?.name;
+
   return (
-    <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white lg:hidden">
+    <div className="sticky top-0 z-5 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white lg:hidden">
       <button
         type="button"
         className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500 lg:hidden"
@@ -48,11 +53,19 @@ export default function SearchHeader({
             <div>
               <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
                 <span className="sr-only">Open user menu</span>
-                <img
+                {/* <img
                   className="h-8 w-8 rounded-full"
                   src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                   alt=""
-                />
+                /> */}
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
+                  <span className="text-sm font-medium leading-none text-white">
+                    {name?.preferred
+                      ? name.preferred.charAt(0)
+                      : name?.first?.charAt(0)}
+                    {name?.last?.charAt(0)}
+                  </span>
+                </span>
               </Menu.Button>
             </div>
             <Transition
@@ -68,8 +81,8 @@ export default function SearchHeader({
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#"
+                      <Link
+                        href="/profile"
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -78,12 +91,12 @@ export default function SearchHeader({
                         )}
                       >
                         View profile
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -93,12 +106,12 @@ export default function SearchHeader({
                         )}
                       >
                         Settings
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -108,14 +121,14 @@ export default function SearchHeader({
                         )}
                       >
                         Notifications
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -125,12 +138,12 @@ export default function SearchHeader({
                         )}
                       >
                         Get desktop app
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -140,15 +153,16 @@ export default function SearchHeader({
                         )}
                       >
                         Support
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#"
+                      <Link
+                        href="/api/v1/auth/logout"
+                        prefetch={false}
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -157,7 +171,7 @@ export default function SearchHeader({
                         )}
                       >
                         Logout
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>

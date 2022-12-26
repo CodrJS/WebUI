@@ -3,14 +3,15 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "utils/classNames";
 import navigation from "./Navigation";
-import teams from "./Teams";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function MobileSidebar({
   sidebar,
 }: {
   sidebar: { open: boolean; setOpen: Dispatch<SetStateAction<boolean>> };
 }) {
+  const pathname = usePathname();
   return (
     <Transition.Root show={sidebar.open} as={Fragment}>
       <Dialog
@@ -76,16 +77,18 @@ export default function MobileSidebar({
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
+                          item.href === pathname
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
                           "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md",
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        aria-current={
+                          item.href === pathname ? "page" : undefined
+                        }
                       >
                         <item.icon
                           className={classNames(
-                            item.current
+                            item.href === pathname
                               ? "text-gray-500"
                               : "text-gray-400 group-hover:text-gray-500",
                             "mr-3 flex-shrink-0 h-6 w-6",
@@ -95,37 +98,6 @@ export default function MobileSidebar({
                         {item.name}
                       </Link>
                     ))}
-                  </div>
-                  <div className="mt-8">
-                    <h3
-                      className="px-3 text-sm font-medium text-gray-500"
-                      id="mobile-teams-headline"
-                    >
-                      Teams
-                    </h3>
-                    <div
-                      className="mt-1 space-y-1"
-                      role="group"
-                      aria-labelledby="mobile-teams-headline"
-                    >
-                      {teams.map(team => (
-                        <Link
-                          passHref
-                          key={team.name}
-                          href={team.href}
-                          className="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                        >
-                          <span
-                            className={classNames(
-                              team.bgColorClass,
-                              "w-2.5 h-2.5 mr-4 rounded-full",
-                            )}
-                            aria-hidden="true"
-                          />
-                          <span className="truncate">{team.name}</span>
-                        </Link>
-                      ))}
-                    </div>
                   </div>
                 </nav>
               </div>

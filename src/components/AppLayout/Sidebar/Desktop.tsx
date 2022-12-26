@@ -3,13 +3,21 @@ import {
   ChevronUpDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
+// import { LockClosedIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import classNames from "utils/classNames";
+import { useProfile } from "utils/contexts/ProfileContext";
 import navigation from "./Navigation";
-import teams from "./Teams";
+import teams from "./Groups";
+import { LockClosedIcon } from "@heroicons/react/24/outline";
 
 export default function DesktopSidebar() {
+  const pathname = usePathname();
+  const [profile] = useProfile();
+  const name = profile?.user?.name;
+
   return (
     <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pt-5 lg:pb-4">
       <div className="flex flex-shrink-0 items-center px-6 text-lg">Codr</div>
@@ -21,17 +29,29 @@ export default function DesktopSidebar() {
             <Menu.Button className="group w-full rounded-md bg-gray-100 px-3.5 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-100">
               <span className="flex w-full items-center justify-between">
                 <span className="flex min-w-0 items-center justify-between space-x-3">
-                  <img
-                    className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
-                    src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                    alt=""
-                  />
+                  <span className="relative inline-block">
+                    {/* <img
+                      className="h-10 w-10 rounded-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    /> */}
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-500">
+                      <span className="font-medium leading-none text-white">
+                        {name?.preferred
+                          ? name.preferred.charAt(0)
+                          : name?.first?.charAt(0)}
+                        {name?.last?.charAt(0)}
+                      </span>
+                    </span>
+                    <span className="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white" />
+                  </span>
                   <span className="flex min-w-0 flex-1 flex-col">
                     <span className="truncate text-sm font-medium text-gray-900">
-                      Jessy Schwarz
+                      {name?.preferred ? name.preferred : name?.first}{" "}
+                      {name?.last}
                     </span>
                     <span className="truncate text-sm text-gray-500">
-                      @jessyschwarz
+                      @{profile?.username}
                     </span>
                   </span>
                 </span>
@@ -57,7 +77,7 @@ export default function DesktopSidebar() {
                   {({ active }) => (
                     <Link
                       passHref
-                      href="#"
+                      href="/profile"
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
@@ -131,7 +151,8 @@ export default function DesktopSidebar() {
                   {({ active }) => (
                     <Link
                       passHref
-                      href="#"
+                      prefetch={false}
+                      href="/api/v1/auth/logout"
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",
@@ -169,6 +190,28 @@ export default function DesktopSidebar() {
             />
           </div>
         </div>
+        {profile?.user.role === "codr:admin" ? (
+          <div className="mt-6 px-3">
+            <Link
+              passHref
+              href="/admin"
+              className={classNames(
+                "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+              )}
+              aria-current={undefined}
+            >
+              <LockClosedIcon
+                className={classNames(
+                  "text-gray-400 group-hover:text-gray-500",
+                  "mr-3 flex-shrink-0 h-6 w-6",
+                )}
+                aria-hidden="true"
+              />
+              Admin Dashboard
+            </Link>
+          </div>
+        ) : null}
         {/* Navigation */}
         <nav className="mt-6 px-3">
           <div className="space-y-1">
@@ -178,16 +221,16 @@ export default function DesktopSidebar() {
                 key={item.name}
                 href={item.href}
                 className={classNames(
-                  item.current
+                  item.href === pathname
                     ? "bg-gray-200 text-gray-900"
                     : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
                   "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                 )}
-                aria-current={item.current ? "page" : undefined}
+                aria-current={item.href === pathname ? "page" : undefined}
               >
                 <item.icon
                   className={classNames(
-                    item.current
+                    item.href === pathname
                       ? "text-gray-500"
                       : "text-gray-400 group-hover:text-gray-500",
                     "mr-3 flex-shrink-0 h-6 w-6",

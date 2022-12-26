@@ -1,5 +1,4 @@
 "use client";
-import Head from "next/head";
 import classNames from "utils/classNames";
 import { Menu, Transition } from "@headlessui/react";
 import {
@@ -16,11 +15,6 @@ const pinnedProjects = PROJECTS.filter(project => project.general.pinned);
 const Home = () => {
   return (
     <>
-      <Head>
-        <title>Codr</title>
-        <meta name="description" content="Codr Web UI" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       {/* Page title & actions */}
       <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <div className="min-w-0 flex-1">
@@ -75,9 +69,9 @@ const Home = () => {
                   >
                     {project.general.title}
                   </Link>
-                  <p className="text-gray-500">
+                  {/* <p className="text-gray-500">
                     {project.general.totalMembers} Members
-                  </p>
+                  </p> */}
                 </div>
                 <Menu as="div" className="flex-shrink-0 pr-2">
                   <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
@@ -165,7 +159,7 @@ const Home = () => {
         >
           {PROJECTS.map(project => (
             <li key={project.id}>
-              <a
+              <Link
                 href={`/project/${project.general.slug}`}
                 className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
               >
@@ -188,7 +182,7 @@ const Home = () => {
                   className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                   aria-hidden="true"
                 />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -206,12 +200,12 @@ const Home = () => {
                 >
                   <span className="lg:pl-2">Project</span>
                 </th>
-                <th
+                {/* <th
                   className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
                   scope="col"
                 >
                   Members
-                </th>
+                </th> */}
                 <th
                   className="hidden border-b border-gray-200 bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900 md:table-cell"
                   scope="col"
@@ -236,7 +230,7 @@ const Home = () => {
                         )}
                         aria-hidden="true"
                       />
-                      <a
+                      <Link
                         href={`/project/${project.general.slug}`}
                         className="truncate hover:text-gray-600"
                       >
@@ -246,10 +240,10 @@ const Home = () => {
                             in {project.general.team}
                           </span>
                         </span>
-                      </a>
+                      </Link>
                     </div>
                   </td>
-                  <td className="px-6 py-3 text-sm font-medium text-gray-500">
+                  {/* <td className="px-6 py-3 text-sm font-medium text-gray-500">
                     <div className="flex items-center space-x-2">
                       <div className="flex flex-shrink-0 -space-x-1">
                         {project.general.members.map(member => (
@@ -271,7 +265,7 @@ const Home = () => {
                         </span>
                       ) : null}
                     </div>
-                  </td>
+                  </td> */}
                   <td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
                     {project.general.lastModified}
                   </td>

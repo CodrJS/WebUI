@@ -1,8 +1,8 @@
 export default function traverse(
   path: string | string[],
   obj: Record<string, any> | any[],
-  result: string[] = [],
-): any[] {
+  result: (any | { value: any; index: number })[] = [],
+): (any | { value: any; index: number })[] {
   if (typeof path === "string") {
     return traverse(path.split("."), obj, result);
   } else if (path instanceof Array) {
@@ -15,8 +15,13 @@ export default function traverse(
       if (obj instanceof Array) {
         // obj is an array
         if (key === "[*]") {
-          for (const item of obj) {
-            result.push(...traverse(path, item));
+          for (const index in obj) {
+            result.push(
+              ...traverse(path, obj[index], result).map(v => ({
+                value: v,
+                index: Number.parseInt(index),
+              })),
+            );
           }
         } else {
           const index = key.match(/([\d]+)/g);

@@ -1,26 +1,15 @@
-"use client";
 import "styles/globals.css";
-import "highlight.js/styles/atom-one-light.css"
-import React, { useState } from "react";
-import Sidebar from "components/Sidebar";
-import SearchHeader from "components/SearchHeader";
+import "highlight.js/styles/atom-one-light.css";
+import React from "react";
 
-export default function AppLayout({ children }: React.PropsWithChildren) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
+export default async function GlobalLayout({
+  children,
+}: React.PropsWithChildren) {
   return (
     <html lang="en">
       <head />
       <body>
-        <div className="flex min-h-full">
-          <Sidebar sidebar={{ open: sidebarOpen, setOpen: setSidebarOpen }} />
-          {/* Main column */}
-          <div className="flex flex-col lg:pl-64 flex-1">
-            {/* Search header */}
-            <SearchHeader sidebar={{ setOpen: setSidebarOpen }} />
-            <main className="flex flex-col flex-1">{children}</main>
-          </div>
-        </div>
+        <div className="flex min-h-full">{children}</div>
       </body>
     </html>
   );

@@ -93,7 +93,7 @@ const ProjectPage = () => {
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
-                          {process.env.NEXT_PUBLIC_ORG_NAME}.codrjs.com/project/
+                          {`${process.env.NEXT_PUBLIC_ORG_NAME}.codrjs.com/project/`}
                         </span>
                         <input
                           type="text"

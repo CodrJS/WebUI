@@ -7,7 +7,7 @@ import { Input } from "types/ProjectConfig";
 import findAndReplace from "utils/findAndReplace";
 import md from "utils/MarkdownIt";
 import traverse from "utils/traverse";
-import Collapse from "./Collapse";
+import Collapse from "components/Collapse";
 
 export default function Inputs(items: Input[], sample: Sample) {
   const out: [JSX.Element[], JSX.Element[]] = [[], []];
@@ -18,7 +18,7 @@ export default function Inputs(items: Input[], sample: Sample) {
     let format = item.format ? `${item.format}` : undefined;
     // get all model paths from the input value
     const modelPaths = value.match(/(\$sample(\.[\w*[\]]+)*)/g);
-    const inputs: string[] = [];
+    const inputs: (string | { value: string; index: number })[] = [];
 
     if (modelPaths !== null) {
       const path = modelPaths[0].split(".");
@@ -32,7 +32,16 @@ export default function Inputs(items: Input[], sample: Sample) {
     if (format) {
       // if a format is given
       for (const val of value as any[]) {
-        inputs.push(findAndReplace(format, val, /(\$value(\.[\w*[\]]+)*)/g));
+        if (typeof val?.index === "number") {
+          val.value = findAndReplace(
+            format,
+            val.value,
+            /(\$value(\.[\w*[\]]+)*)/g,
+          );
+          inputs.push(val);
+        } else {
+          inputs.push(findAndReplace(format, val, /(\$value(\.[\w*[\]]+)*)/g));
+        }
 
         // reset formated string.
         format = `${item.format}`;
@@ -47,10 +56,16 @@ export default function Inputs(items: Input[], sample: Sample) {
 
     let counter = 0;
     for (const input of inputs) {
-      const text = input.toString();
+      const text = (
+        (input as { value: string; index: number }).value || input
+      ).toString();
+      const index = (input as { value: string; index: number })?.index + 1;
+      const header = item.header
+        ? findAndReplace(item.header, index, /(\$index)/g)
+        : "";
       if (item.collapsible)
         out[0].push(
-          <Collapse key={`collaplible-${counter++}`}>
+          <Collapse key={`collapsible-input-${counter++}`} title={header}>
             <div
               className="flex-grow"
               dangerouslySetInnerHTML={{
@@ -63,6 +78,7 @@ export default function Inputs(items: Input[], sample: Sample) {
         out[1].push(
           <div
             className="prose prose-p:mb-0 prose-p:mt-0 border border-gray-200 rounded-lg py-2 px-4 shadow-sm max-w-full"
+            key={`input-${counter++}`}
             dangerouslySetInnerHTML={{
               __html: md.render(text),
             }}

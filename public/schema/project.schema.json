@@ -43,7 +43,7 @@
             "properties": {
               "type": {
                 "enum": ["text"],
-                "description": "Type of data to be displayed. Use `code` to enable highlighting."
+                "description": "Type of data to be displayed."
               },
               "value": {
                 "type": "string",
@@ -57,6 +57,10 @@
               "collapsible": {
                 "type": "boolean",
                 "description": "Whether or not to display the input in a collapsible UI component."
+              },
+              "header": {
+                "type": "string",
+                "description": "Header for collapsible object, $index dot notation supported."
               }
             },
             "required": ["type"],

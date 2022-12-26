@@ -30,7 +30,7 @@ export default function Radio({
           path.shift();
           const result = traverse(path, sample).map((opt, idx) => ({
             key: `${id}-${idx + 1}`,
-            value: opt,
+            value: opt.value,
           }));
           return result;
         } else {

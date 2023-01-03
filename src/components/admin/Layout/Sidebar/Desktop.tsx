@@ -71,7 +71,7 @@ export default function DesktopSidebar() {
           >
             <Menu.Items className="absolute right-0 left-0 z-10 mx-3 mt-1 origin-top divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
-                <Menu.Item>
+                {/* <Menu.Item>
                   {({ active }) => (
                     <Link
                       passHref
@@ -84,12 +84,12 @@ export default function DesktopSidebar() {
                       View profile
                     </Link>
                   )}
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item>
                   {({ active }) => (
                     <Link
                       passHref
-                      href="#"
+                      href="/settings/profile"
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",

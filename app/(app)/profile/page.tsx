@@ -7,13 +7,16 @@ const ProfilePage = () => {
   console.log(profile);
 
   return (
-    <div className="flex flex-col lg:flex-row lg:flex-1">
-      <div className="flex flex-col py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 flex-1">
-        <div className="prose lg:prose-md">
-          <h2>Profile</h2>
+    <>
+      <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <div className="min-w-0 flex-1 py-2">
+          <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">
+            Profile
+          </h1>
         </div>
       </div>
-    </div>
+      <div className="flex flex-col lg:flex-row lg:flex-1"></div>
+    </>
   );
 };
 

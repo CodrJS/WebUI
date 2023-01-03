@@ -17,7 +17,7 @@ const Home = () => {
     <>
       {/* Page title & actions */}
       <div className="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 py-2 flex-1">
           <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">
             Home
           </h1>
@@ -47,8 +47,8 @@ const Home = () => {
         >
           {pinnedProjects.map(project => (
             <li
-              key={project.id}
-              className="relative col-span-1 flex rounded-md shadow-sm"
+              key={project._id}
+              className="relative col-span-1 flex rounded-md shadow-sm z-0"
             >
               <div
                 className={classNames(
@@ -158,7 +158,7 @@ const Home = () => {
           className="mt-3 divide-y divide-gray-100 border-t border-gray-200"
         >
           {PROJECTS.map(project => (
-            <li key={project.id}>
+            <li key={project._id}>
               <Link
                 href={`/project/${project.general.slug}`}
                 className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
@@ -174,7 +174,7 @@ const Home = () => {
                   <span className="truncate text-sm font-medium leading-6">
                     {project.general.title}{" "}
                     <span className="truncate font-normal text-gray-500">
-                      in {project.general.team}
+                      in {project.team.name}
                     </span>
                   </span>
                 </span>
@@ -220,7 +220,7 @@ const Home = () => {
             </thead>
             <tbody className="divide-y divide-gray-100 bg-white">
               {PROJECTS.map(project => (
-                <tr key={project.id}>
+                <tr key={project._id}>
                   <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
                     <div className="flex items-center space-x-3 lg:pl-2">
                       <div
@@ -237,7 +237,7 @@ const Home = () => {
                         <span>
                           {project.general.title}{" "}
                           <span className="font-normal text-gray-500">
-                            in {project.general.team}
+                            in {project.team.name}
                           </span>
                         </span>
                       </Link>
@@ -267,7 +267,7 @@ const Home = () => {
                     </div>
                   </td> */}
                   <td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
-                    {project.general.lastModified}
+                    {project.general.updatedAt}
                   </td>
                   <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                     <Link

@@ -1,5 +1,6 @@
 "use client";
 import { EyeIcon } from "@heroicons/react/24/outline";
+import Button from "components/Button";
 import ProjectNav from "components/ProjectNav";
 import SlideOver from "components/SlideOver";
 import { DATASETS } from "data/projects";
@@ -159,13 +160,9 @@ const ProjectPage = () => {
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                  <button
-                    type="submit"
-                    disabled
-                    className="inline-flex justify-center rounded-md border border-transparent bg-sky-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
-                  >
+                  <Button type="submit" disabled>
                     Save (disabled)
-                  </button>
+                  </Button>
                 </div>
               </div>
             </form>

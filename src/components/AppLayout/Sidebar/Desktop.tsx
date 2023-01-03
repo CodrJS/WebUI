@@ -1,3 +1,5 @@
+"use client";
+import { Fragment, useMemo } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import {
   ChevronUpDownIcon,
@@ -6,7 +8,6 @@ import {
 // import { LockClosedIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment } from "react";
 import classNames from "utils/classNames";
 import { useProfile } from "utils/contexts/ProfileContext";
 import navigation from "./Navigation";
@@ -16,7 +17,7 @@ import { LockClosedIcon } from "@heroicons/react/24/outline";
 export default function DesktopSidebar() {
   const pathname = usePathname();
   const [profile] = useProfile();
-  const name = profile?.user?.name;
+  const name = useMemo(() => profile?.user?.name, [profile]);
 
   return (
     <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pt-5 lg:pb-4">
@@ -73,7 +74,7 @@ export default function DesktopSidebar() {
           >
             <Menu.Items className="absolute right-0 left-0 z-10 mx-3 mt-1 origin-top divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
-                <Menu.Item>
+                {/* <Menu.Item>
                   {({ active }) => (
                     <Link
                       passHref
@@ -86,12 +87,12 @@ export default function DesktopSidebar() {
                       View profile
                     </Link>
                   )}
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item>
                   {({ active }) => (
                     <Link
                       passHref
-                      href="#"
+                      href="/settings/profile"
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                         "block px-4 py-2 text-sm",

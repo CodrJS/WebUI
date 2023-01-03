@@ -8,7 +8,7 @@ export default async function CodrLayout({
   children,
 }: React.PropsWithChildren) {
   const user = await getRequestCookie(cookies());
-  console.warn(user);
+  // console.warn(user);
   // Prevent non logged in user to access application
   if (!user) {
     redirect("/signin");

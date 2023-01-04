@@ -62,20 +62,10 @@
               "collapsible": {
                 "type": "boolean",
                 "description": "Whether or not to display the input in a collapsible UI component."
-<<<<<<< Updated upstream
               },
               "header": {
                 "type": "string",
                 "description": "Header for collapsible object, $index dot notation supported."
-=======
-<<<<<<< Updated upstream
-=======
-              },
-              "header": {
-                "type": "string",
-                "description": "Header for collapsible object, $index value supported."
->>>>>>> Stashed changes
->>>>>>> Stashed changes
               }
             },
             "required": ["type"],
